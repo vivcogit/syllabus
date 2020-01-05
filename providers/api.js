@@ -16,26 +16,26 @@ export function sortFabric(getter = defaultGetter, sortDirection = 1) {
     };
 }
 
+function getHostFromReq(req = {}) {
+    return req.headers
+        ? `${req.headers['x-forwarded-proto']}://${req.headers['x-forwarded-host']}`
+        : '';
+}
+
 class ApiProvider {
-    baseUrl = '';
-
-    constructor(baseUrl) {
-        this.baseUrl = baseUrl;
-    }
-
-    get = async (url) => {
+    get = async (url, req) => {
         try {
-            const response = await fetch(`${this.baseUrl}${url}`);
+            const response = await fetch(`${getHostFromReq(req)}${url}`);
             return await this.handleResponse(response);
         } catch (error) {
             return this.handleError(error);
         }
     }
 
-    post = async (url, body) => {
+    post = async (url, req, body) => {
         try {
             const response = await fetch(
-                `${this.baseUrl}${url}`,
+                `${getHostFromReq(req)}${url}`,
                 {
                     method: 'POST',
                     headers: {
@@ -60,14 +60,14 @@ class ApiProvider {
         throw new Error(error);
     }
 
-    getMenu = async () => {
-        const menu = await this.get('/api/menu');
+    getMenu = async (req) => {
+        const menu = await this.get('/api/menu', req);
 
         return { menu };
     }
 
-    getVocabulary = async () => {
-        const data = await this.get('/api/vocabulary');
+    getVocabulary = async (req) => {
+        const data = await this.get('/api/vocabulary', req);
 
         return {
             ...data,
@@ -75,15 +75,15 @@ class ApiProvider {
         };
     }
 
-    postRule = async (rule) => {
-        await this.post('/api/rules', rule);
+    postRule = async (rule, req) => {
+        await this.post('/api/rules', req, rule);
     }
 
-    getRule = async (rule) => {
-        return await this.get(`/api/rules/${rule}`);
+    getRule = async (rule, req) => {
+        return await this.get(`/api/rules/${rule}`, req);
     }
 }
 
-const apiProvider = new ApiProvider(process.env.API_URI);
+const apiProvider = new ApiProvider();
 
 export default apiProvider;

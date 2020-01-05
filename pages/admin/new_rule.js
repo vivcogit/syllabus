@@ -26,7 +26,7 @@ function NewRulePage(props) {
             content: editorValue,
             title,
             href: title.toLowerCase().replace(/ /g, '_'),
-        })
+        });
     });
 
     return (

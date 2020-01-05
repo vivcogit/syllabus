@@ -55,7 +55,9 @@ function Vocabulary(props) {
     );
 }
 
-Vocabulary.getInitialProps = apiProvider.getVocabulary;
+Vocabulary.getInitialProps = ({req}) => (
+    apiProvider.getVocabulary(req)
+);
 
 Vocabulary.defaultProps = {
     vocabulary: [],
