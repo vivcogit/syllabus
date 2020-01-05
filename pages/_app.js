@@ -6,8 +6,7 @@ import apiProvider from '../providers/api';
 class MyApp extends App {
     static async getInitialProps(context) {
         const { Component, ctx } = context;
-
-        const menuData = await apiProvider.getMenu();
+        const menuData = await apiProvider.getMenu(ctx.req);
         
         if (Component.getInitialProps) {
             const pageProps = await Component.getInitialProps(ctx);
