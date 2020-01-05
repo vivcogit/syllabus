@@ -1,0 +1,14 @@
+1. rules API
+    - update item
+    - delete item
+2. DB rules
+    - update item
+    - delete item
+3. client rule
+    - add edit rule page
+4. admin pages
+    - authorization
+
+Readme
+GitHub + CI/CD
+mongoose (?)
