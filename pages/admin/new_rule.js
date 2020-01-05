@@ -22,7 +22,6 @@ function NewRulePage(props) {
     const [ title, setTitle ] = useState('');
 
     const saveRule = useCallback(async () => {
-        console.log(editorValue)
         await apiProvider.postRule({
             content: editorValue,
             title,
