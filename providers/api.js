@@ -20,6 +20,7 @@ class ApiProvider {
     baseUrl = '';
 
     constructor(baseUrl) {
+        console.log(baseUrl);
         this.baseUrl = baseUrl;
     }
 
