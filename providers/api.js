@@ -23,25 +23,35 @@ function getHostFromReq(req = {}) {
 }
 
 class ApiProvider {
-    get = async (url, req) => {
-        try {
-            const response = await fetch(`${getHostFromReq(req)}${url}`);
-            return await this.handleResponse(response);
-        } catch (error) {
-            return this.handleError(error);
-        }
+    handleResponse = async (response) => {
+        return await response.json();
     }
 
-    post = async (url, req, body) => {
+    handleError = (error) => {
+        console.error(error);
+        throw new Error(error);
+    }
+
+    request = async ({ url, body, req, method = 'GET' }) => {
+        if (!url) {
+            throw new Error('url must be setted');
+        }
+
+        if (!process.browser && !req) {
+            throw new Error('You need to pass req for requests on server-side');
+        }
+
+        const headers = body
+            ? { 'Content-Type': 'application/json' }
+            : null;
+
         try {
             const response = await fetch(
                 `${getHostFromReq(req)}${url}`,
                 {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(body)
+                    method,
+                    headers,
+                    body: body ? JSON.stringify(body) : null,
                 }
             );
 
@@ -51,13 +61,16 @@ class ApiProvider {
         }
     }
 
-    handleResponse = async (response) => {
-        return await response.json();
+    get = async (url, req) => {
+        return await this.request({ url, req, method: 'GET'});
     }
 
-    handleError = (error) => {
-        console.error(error);
-        throw new Error(error);
+    post = async (url, body, req) => {
+        return await this.request({ url, req, body, method: 'POST'});
+    }
+
+    put = async (url, body, req) => {
+        return await this.request({ url, req, body, method: 'PUT'});
     }
 
     getMenu = async (req) => {
@@ -76,7 +89,11 @@ class ApiProvider {
     }
 
     postRule = async (rule, req) => {
-        await this.post('/api/rules', req, rule);
+        await this.post('/api/rules', rule, req);
+    }
+
+    putRule = async (rule, req) => {
+        await this.put('/api/rules', rule, req);
     }
 
     getRule = async (rule, req) => {

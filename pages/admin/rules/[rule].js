@@ -10,23 +10,31 @@ import '@react-page/plugins-slate/lib/index.css';
 import background from '@react-page/plugins-background';
 import '@react-page/plugins-background/lib/index.css';
 
-import apiProvider from '../../providers/api';
+import apiProvider from '../../../providers/api';
 
 const plugins = {
     content: [slate()],
     layout: [background({ defaultPlugin: slate(), })],
 };
 
-function NewRulePage(props) {
-    const [ editorValue, setEditorValue ] = useState();
-    const [ title, setTitle ] = useState('');
+function AdminRulePage(props) {
+    const { rule = {} } = props;
+
+    const [ content, setContent ] = useState(rule.content);
+    const [ title, setTitle ] = useState(rule.title);
 
     const saveRule = useCallback(async () => {
-        await apiProvider.postRule({
-            content: editorValue,
+        const ruleForSave = {
+            content,
             title,
             href: title.toLowerCase().replace(/ /g, '_'),
-        });
+        };
+
+        if (rule._id) {
+            await apiProvider.putRule({ ...rule, ...ruleForSave });
+        } else {
+            await apiProvider.postRule(ruleForSave);
+        }
     });
 
     return (
@@ -54,16 +62,19 @@ function NewRulePage(props) {
 
             <Editor
                 plugins={plugins}
-                value={editorValue}
-                onChange={setEditorValue}
+                value={content}
+                onChange={setContent}
                 defaultPlugin={slate()}
             />
         </Pane>
     );
 }
 
-NewRulePage.getInitialProps = async () => {
-    console.log('getInitialProps')
+AdminRulePage.getInitialProps = async ({ query, req }) => {
+    if (query.rule !== 'new') {
+        const rule = await apiProvider.getRule(query.rule, req);
+        return { rule };
+    }
 }
 
-export default NewRulePage;
+export default AdminRulePage;

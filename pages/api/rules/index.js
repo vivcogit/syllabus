@@ -16,6 +16,18 @@ export default async (req, res) => {
             }
             break;
         }
+        case 'PUT': {
+            const rule = req.body;
+            try {                
+                const result = await dataBaseProvider.updateRule(rule);
+                res.status(200)
+                    .json({ success: true, result });
+            } catch (error) {
+                res.status(400)
+                    .json({ error });
+            }
+            break;
+        }
         default:
             res.status(405).end();
             break;

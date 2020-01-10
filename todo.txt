@@ -1,14 +1,8 @@
-1. rules API
-    - update item
-    - delete item
-2. DB rules
-    - update item
-    - delete item
-3. client rule
-    - add edit rule page
-4. admin pages
-    - authorization
-
+test edit/update/delete vocabulary
+improve error handling in DB actions
+endpoint delete rule
+test delete rules
+authorization
+make factory for db actions (with scheme, on create/update check required fields, on delete only id)
+DRY in api provider
 Readme
-GitHub + CI/CD
-mongoose (?)
