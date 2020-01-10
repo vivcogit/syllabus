@@ -1,8 +1,7 @@
 test edit/update/delete vocabulary
-improve error handling in DB actions
+improve DB error handling in api routes
 endpoint delete rule
 test delete rules
 authorization
 make factory for db actions (with scheme, on create/update check required fields, on delete only id)
-DRY in api provider
 Readme

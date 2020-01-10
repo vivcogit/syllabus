@@ -4,7 +4,7 @@ function defaultGetter(item) {
     return item;
 }
 
-export function sortFabric(getter = defaultGetter, sortDirection = 1) {
+function sortFabric(getter = defaultGetter, sortDirection = 1) {
     return (itemA, itemB) => {
         const [a, b] = [getter(itemA), getter(itemB)];
 
