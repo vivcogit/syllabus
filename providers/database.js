@@ -44,8 +44,8 @@ class DataBaseProvider {
             throw new Error('Vocabulary item must have a word');
         }
 
-        if (!rule.translate) {
-            throw new Error('Vocabulary item must have a translate');
+        if (!rule.translation) {
+            throw new Error('Vocabulary item must have a translation');
         }
 
         const collection = await this.getCollection('vocabulary');
@@ -76,6 +76,10 @@ class DataBaseProvider {
             const res = await collection.deleteOne(
                 { _id: new ObjectID(_id) }
             );
+
+            if (!res.result.ok) {
+                throw new Error(res.message);
+            }
 
             return res.result;
         } catch (error) {
@@ -119,7 +123,11 @@ class DataBaseProvider {
         }
 
         const collection = await this.getCollection('rules');
-        await collection.insert(rule);
+        const res = await collection.insert(rule);
+
+        if (!res.result.ok) {
+            throw new Error(res.message);
+        }
     }
 
     async updateRule(rule) {
@@ -132,6 +140,11 @@ class DataBaseProvider {
                 data,
                 { upsert: true },
             );
+
+            if (!res.result.ok) {
+                throw new Error(res.message);
+            }
+
             return res.result;
         } catch (error) {
             throw error.message;
@@ -140,12 +153,17 @@ class DataBaseProvider {
 
     async deleteRule(rule) {
         const collection = await this.getCollection('rule');
+
         try {
             const { _id } = item;
 
             const res = await collection.deleteOne(
                 { _id: new ObjectID(_id) }
             );
+
+            if (!res.result.ok) {
+                throw new Error(res.message);
+            }
 
             return res.result;
         } catch (error) {

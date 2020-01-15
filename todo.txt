@@ -1,7 +1,8 @@
 test edit/update/delete vocabulary
-improve DB error handling in api routes
-endpoint delete rule
 test delete rules
 authorization
+    https://medium.com/swlh/jwt-authentication-authorization-in-nodejs-express-mongodb-rest-apis-2019-ad14ec818122
+    https://www.npmjs.com/package/bcryptjs
+    https://dev.to/jolvera/user-authentication-with-nextjs-4023#backend
 make factory for db actions (with scheme, on create/update check required fields, on delete only id)
 Readme

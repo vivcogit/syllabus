@@ -3,386 +3,386 @@ export default {
     data: [
         {
             "word": "expect",
-            "translate": "ожидать"
+            "translation": "ожидать"
         },
         {
             "word": "I don't mind",
-            "translate": "Я не против",
+            "translation": "Я не против",
         },
         {
             "word": "I stopped smoking = quit",
-            "translate": "Я бросил купить"
+            "translation": "Я бросил купить"
         },
         {
             "word": "I stopped to smoke = reason",
-            "translate": "Я остановился покурить",
+            "translation": "Я остановился покурить",
         },
         {
             "word": "look forward to", 
-            "translate": "с нетерпением ждать",
+            "translation": "с нетерпением ждать",
             "example": "I'm looking forward to meeting you",
         },
         {
             "word": "get used to", 
-            "translate": "привыкать",
+            "translation": "привыкать",
             "example": "I can't get used to living abroad",
         },
         {
             "word": "attitude",
-            "translate": "отношение",
+            "translation": "отношение",
         },
         {
             "word": "leftovers", 
-            "translate": "остатки",
+            "translation": "остатки",
         },
         {
             "word": "bargain", 
-            "translate": "находка",
+            "translation": "находка",
         },
         {
             "word": "enlarge", 
-            "translate": "расширять",
+            "translation": "расширять",
             "example": "enlarge your vocabulary",
         },
         {
             "word": "efficient", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "take revenge on somebody", 
-            "translate": "отомстить кому-то"
+            "translation": "отомстить кому-то"
         },
         {
             "word": "thoroughly", 
-            "translate": "тщательно"
+            "translation": "тщательно"
         },
         {
             "word": "smooth", 
-            "translate": "гладкий"
+            "translation": "гладкий"
         },
         {
             "word": "variety", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "to be overwhelmed with", 
-            "translate": "быть перегруженным",
+            "translation": "быть перегруженным",
         },
         {
             "word": "violin", 
-            "translate": "скрипка",
+            "translation": "скрипка",
         },
         {
             "word": "humid", 
-            "translate": "влажно",
+            "translation": "влажно",
         },
         {
             "word": "widen", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "obstacle", 
-            "translate": "препятствие",
+            "translation": "препятствие",
         },
         {
             "word": "give up", 
-            "translate": "1. Сдаться 2. Бросить (привычку)",
+            "translation": "1. Сдаться 2. Бросить (привычку)",
         },
         {
             "word": "cheat sheet", 
-            "translate": "шпора",
+            "translation": "шпора",
         },
         {
             "word": "stomach ache", 
-            "translate": "",
+            "translation": "",
             "example": "3 kinds of ach",
         },
         {
             "word": "irresponsible", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "either ... or", 
-            "translate": "или ... или ...",
+            "translation": "или ... или ...",
         },
         {
             "word": "shuttle", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "southern", 
-            "translate": "южный",
+            "translation": "южный",
         },
         {
             "word": "simultanuously", 
-            "translate": "одновременно",
+            "translation": "одновременно",
         },
         {
             "word": "instinctively", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "recently", 
-            "translate": "недавно",
+            "translation": "недавно",
         },
         {
             "word": "lately", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "get rid of", 
-            "translate": "избавляться",
+            "translation": "избавляться",
             "example": "I got rid of my habit",
         },
         {
             "word": "notice", 
-            "translate": "замечать",
+            "translation": "замечать",
         },
         {
             "word": "hardly", 
-            "translate": "едва",
+            "translation": "едва",
         },
         {
             "word": "Judging by its shqpe", 
-            "translate": "судя по его форме",
+            "translation": "судя по его форме",
         },
         {
             "word": "enormous", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "cereal", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "bald", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "distract from", 
-            "translate": "отвлекать от чего-то",
+            "translation": "отвлекать от чего-то",
         },
         {
             "word": "lark", 
-            "translate": "жаворонок",
+            "translation": "жаворонок",
         },
         {
             "word": "sedentary work", 
-            "translate": "сидячая работа",
+            "translation": "сидячая работа",
         },
         {
             "word": "have to = need to", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "neither of us", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "convenient", 
-            "translate": "удобно",
+            "translation": "удобно",
         },
         {
             "word": "selfish", 
-            "translate": "эгоист",
+            "translation": "эгоист",
         },
         {
             "word": "vomit", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "disgusting", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "appreciate", 
-            "translate": "ценить",
+            "translation": "ценить",
         },
         {
             "word": "match", 
-            "translate": "совпадать",
+            "translation": "совпадать",
         },
         {
             "word": "put on", 
-            "translate": "надевать",
+            "translation": "надевать",
         },
         {
             "word": "caring", 
-            "translate": "заботливый",
+            "translation": "заботливый",
         },
         {
             "word": "sacrifice", 
-            "translate": "жертвовать",
+            "translation": "жертвовать",
         },
         {
             "word": "envy", 
-            "translate": "завидовать",
+            "translation": "завидовать",
         },
         {
             "word": "be good at smth", 
-            "translate": "быть хорошим в smth",
+            "translation": "быть хорошим в smth",
         },
         {
             "word": "superficial", 
-            "translate": "поверхностный",
+            "translation": "поверхностный",
         },
         {
             "word": "try on", 
-            "translate": "примерять",
+            "translation": "примерять",
         },
         {
             "word": "sneeze", 
-            "translate": "чихать",
+            "translation": "чихать",
         },
         {
             "word": "from … to", 
-            "translate": "с такого времени по такое",
+            "translation": "с такого времени по такое",
         },
         {
             "word": "revise", 
-            "translate": "повторять",
+            "translation": "повторять",
         },
         {
             "word": "vowel", 
-            "translate": "гласная",
+            "translation": "гласная",
         },
         {
             "word": "consonant", 
-            "translate": "согласная",
+            "translation": "согласная",
         },
         {
             "word": "ten TO ten", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "half PAST six", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "AT the same time", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "that's why", 
-            "translate": "Поэтому",
+            "translation": "Поэтому",
         },
         {
             "word": "I hope = hopefully", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "frying pan", 
-            "translate": "сковорода",
+            "translation": "сковорода",
         },
         {
             "word": "fall asleep", 
-            "translate": "засыпать",
+            "translation": "засыпать",
         },
         {
             "word": "plot", 
-            "translate": "сюжет",
+            "translation": "сюжет",
         },
         {
             "word": "for dummies", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "In a nutshell", 
-            "translate": "Короче говоря",
+            "translation": "Короче говоря",
         },
         {
             "word": "have cold", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "grey hair", 
-            "translate": "судые волосы",
+            "translation": "судые волосы",
         },
         {
             "word": "dyed",
-            "translate": "окрашенные",
+            "translation": "окрашенные",
         },
         {
             "word": "handsome FOR MEN", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "beautiful / pretty FOR WOMEN", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "broad",
-            "translate": "широкий",
+            "translation": "широкий",
             "example": "broad shoulders",
         },
         {
             "word": "have my hair cut", 
-            "translate": "иметь мои волосы подстрижеными",
+            "translation": "иметь мои волосы подстрижеными",
         },
         {
             "word": "hairdo",
-            "translate": "прическа",
+            "translation": "прическа",
         },
         {
             "word": "infidelity",
-            "translate": "неверность",
+            "translation": "неверность",
         },
         {
             "word": "eyesight", 
-            "translate": "зрение",
+            "translation": "зрение",
         },
         {
             "word": "put through", 
-            "translate": "соединять",
+            "translation": "соединять",
         },
         {
             "word": "get lost",
-            "translate": "потеряться",
+            "translation": "потеряться",
             "example": "Get lost!( проваливай",
         },
         {
             "word": "argue",
-            "translate": "ругаться",
+            "translation": "ругаться",
         },
         {
             "word": "election", 
-            "translate": "выборы",
+            "translation": "выборы",
         },
         {
             "word": "tence", 
-            "translate": "напряжение",
+            "translation": "напряжение",
         },
         {
             "word": "in advance", 
-            "translate": "заранее",
+            "translation": "заранее",
         },
         {
             "word": "medieval", 
-            "translate": "средневековый",
+            "translation": "средневековый",
         },
         {
             "word": "controversial impressions", 
-            "translate": "протеворечивые впечатления",
+            "translation": "протеворечивые впечатления",
         },
         {
             "word": "ride a bike/horse", 
-            "translate": "ехать (сверху на чем-то)",
+            "translation": "ехать (сверху на чем-то)",
         },
         {
             "word": "scenery", 
-            "translate": "",
+            "translation": "",
         },
         {
             "word": "get on the bus", 
-            "translate": "сесть на автобус",
+            "translation": "сесть на автобус",
         },
         {
             "word": "get off the bus", 
-            "translate": "выйти из автобуса",
+            "translation": "выйти из автобуса",
         },
         {
             "word": "diverse", 
-            "translate": "разносторонний",
+            "translation": "разносторонний",
         },
     ],
 };

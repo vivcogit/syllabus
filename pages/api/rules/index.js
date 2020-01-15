@@ -11,20 +11,21 @@ export default async (req, res) => {
             } catch (error) {
                 console.log(error.message);
 
-                res.status(400)
+                res.status(500)
                     .json({ error: error.message });
             }
             break;
         }
         case 'PUT': {
             const rule = req.body;
+
             try {                
                 const result = await dataBaseProvider.updateRule(rule);
                 res.status(200)
                     .json({ success: true, result });
             } catch (error) {
-                res.status(400)
-                    .json({ error });
+                res.status(500)
+                    .json({ error: error.message });
             }
             break;
         }
