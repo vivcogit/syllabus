@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Pane, TextInput, Button } from 'evergreen-ui';
+import { Pane, TextInput, Button, toaster } from 'evergreen-ui';
 
 import Editor from '@react-page/editor';
 import '@react-page/core/lib/index.css';
@@ -30,10 +30,22 @@ function AdminRulePage(props) {
             href: title.toLowerCase().replace(/ /g, '_'),
         };
 
-        if (rule._id) {
-            await apiProvider.putRule({ ...rule, ...ruleForSave });
-        } else {
-            await apiProvider.postRule(ruleForSave);
+        const isUpdateExisted = !!rule._id;
+ 
+        try {
+            let result;
+
+            if (isUpdateExisted) {
+                result = await apiProvider.putRule({ ...rule, ...ruleForSave });
+            } else {
+                result = await apiProvider.postRule(ruleForSave);
+            }
+
+            console.log(result);
+            toaster.success(`Rule was ${isUpdateExisted ? 'updated' : 'created'} successfully`);
+        } catch (error) {
+            console.error(error);
+            toaster.danger(`Something went wrong trying to ${isUpdateExisted ? 'update' : 'create new'} rule`);
         }
     });
 

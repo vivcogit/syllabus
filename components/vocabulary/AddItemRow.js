@@ -40,7 +40,7 @@ function AddItemRow(props) {
             <Table.Cell>
                 <Button
                     onClick={isPending ? null : onAdd}
-                    disabled={isPending}
+                    disabled={isPending || !word || !translation}
                 >
                     {isPending
                         ? <Spinner size={16} />

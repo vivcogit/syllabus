@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
-    Heading, Pane, Table, TextInput, Button,
+    Heading, Pane, Table, TextInput, Button, toaster,
 } from 'evergreen-ui';
 
 import apiProvider from '../../providers/api';
@@ -14,11 +14,36 @@ function Vocabulary(props) {
     const [ word, setWord ] = useState('');
     const [ translation, setTranslation ] = useState('');
     const [ example, setExample ] = useState('');
+    const [ isPenging, setIsPending ] = useState(false);
     const [ data, setData ] = useState([]);
 
     useEffect(() => {
         setData(vocabulary);
-    }, true);
+    }, []);
+
+    const addItem = useCallback(async () => {
+        setIsPending(true);
+        const newItem = {
+            translation,
+            word,
+            example,
+        };
+        
+        try {
+            console.log(newItem);
+            const result = await apiProvider.postVocabularyItem(newItem);
+            
+            console.log(result);
+            toaster.success('Word was created successfully');
+            setWord('');
+            setTranslation('');
+            setExample('');
+        } catch (error) {
+            console.error(error);
+            toaster.danger('Something went wrong trying to create new rule');
+        }
+        setIsPending(false);
+    });
 
     const usedVocabulary = data.filter((item) => (
         !filter
@@ -53,6 +78,8 @@ function Vocabulary(props) {
                         onChangeWord={setWord}
                         onChangeTranslation={setTranslation}
                         onChangeExample={setExample}
+                        onAdd={addItem}
+                        isPenging={isPenging}
                     />
 
                     {usedVocabulary.map((row) => (

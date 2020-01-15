@@ -88,12 +88,16 @@ class ApiProvider {
         };
     }
 
+    postVocabularyItem = async (item, req) => {
+        return await this.post('/api/vocabulary', item, req);
+    }
+
     postRule = async (rule, req) => {
-        await this.post('/api/rules', rule, req);
+        return await this.post('/api/rules', rule, req);
     }
 
     putRule = async (rule, req) => {
-        await this.put('/api/rules', rule, req);
+        return await this.put('/api/rules', rule, req);
     }
 
     getRule = async (rule, req) => {

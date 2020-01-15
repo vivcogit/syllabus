@@ -40,11 +40,11 @@ class DataBaseProvider {
     }
 
     async insertVocabularyItem(item) {
-        if (!rule.word) {
+        if (!item.word) {
             throw new Error('Vocabulary item must have a word');
         }
 
-        if (!rule.translation) {
+        if (!item.translation) {
             throw new Error('Vocabulary item must have a translation');
         }
 

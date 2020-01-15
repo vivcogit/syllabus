@@ -1,5 +1,10 @@
-test edit/update/delete vocabulary
-test delete rules
+update vocabulary after adding item
+add update/delete vocabulary item
+add delete rules
+add check uniq for vocabulary (by word) and for ruls (by link)
+make api consistent
+TypeScript
+redirect to created rule (?)
 authorization
     https://medium.com/swlh/jwt-authentication-authorization-in-nodejs-express-mongodb-rest-apis-2019-ad14ec818122
     https://www.npmjs.com/package/bcryptjs

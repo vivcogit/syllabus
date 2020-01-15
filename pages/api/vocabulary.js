@@ -12,14 +12,16 @@ export default async (req, res) => {
                 break;
             }
             case 'POST': {
-                const result = await dataBaseProvider.insertVocabularyItem();
+                const result = await dataBaseProvider.insertVocabularyItem(req.body);
+
                 res
                     .status(200)
                     .json({ success: true, result });
                 break;
             }
             case 'PUT': {
-                const result = await dataBaseProvider.updateVocabularyItem();
+                const result = await dataBaseProvider.updateVocabularyItem(req.body);
+
                 res
                     .status(200)
                     .json({ success: true, result });
@@ -27,7 +29,7 @@ export default async (req, res) => {
                 break;
             }
             case 'DELETE': {
-                const result = await dataBaseProvider.deleteVocabularyItem();
+                const result = await dataBaseProvider.deleteVocabularyItem(req.body.id);
                 res
                     .status(200)
                     .json({ success: true, result });
