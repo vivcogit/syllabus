@@ -1,4 +1,4 @@
-import dataBaseProvider from '../../../providers/database';
+import dataBaseProvider from '../../providers/database';
 
 export default async (req, res) => {
     switch (req.method) {
