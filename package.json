@@ -15,6 +15,7 @@
   "dependencies": {
     "@react-page/react-page": "^0.16.4",
     "@zeit/next-css": "^1.0.1",
+    "bcryptjs": "^2.4.3",
     "evergreen-ui": "^4.21.5",
     "isomorphic-unfetch": "^3.0.0",
     "mongodb": "^3.4.1",

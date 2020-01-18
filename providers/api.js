@@ -43,7 +43,7 @@ class ApiProvider {
 
         const headers = body
             ? { 'Content-Type': 'application/json' }
-            : null;
+            : undefined;
 
         try {
             const response = await fetch(
@@ -51,7 +51,7 @@ class ApiProvider {
                 {
                     method,
                     headers,
-                    body: body ? JSON.stringify(body) : null,
+                    body: body ? JSON.stringify(body) : undefined,
                 }
             );
 

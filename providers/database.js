@@ -1,11 +1,22 @@
 import url from 'url';
 import { MongoClient, ObjectID } from 'mongodb';
+import bcryptjs from 'bcryptjs';
 
 class DataBaseProvider {
     cachedDb = null;
+    authSalt = null;
     
-    constructor(dbUri) {
+    constructor(dbUri, authSalt) {
+        if (!dbUri) {
+            throw new Error('dbUri must be setted!');
+        }
+
+        if (!authSalt) {
+            throw new Error('authSalt must be setted!');
+        }
+
         this.dbUri = dbUri;
+        this.authSalt = authSalt;
     }
 
     async getConnectToDatabase() {
@@ -170,8 +181,34 @@ class DataBaseProvider {
             throw error.message;            
         }
     }
+
+    async insertUser(login, password) {
+        if (!login) {
+            throw new Error('login must be not undefined');
+        }
+
+        if (!password) {
+            throw new Error('password must be not undefined');
+        }
+
+        const pwdHash = bcryptjs.hashSync(password);
+
+        const collection = await this.getCollection('users');
+        const res = await collection.insert({
+            login,
+            password: pwdHash,
+            tokens: [],
+        });
+
+        if (!res.result.ok) {
+            throw new Error(res.message);
+        }
+    }
 }
 
-const dataBaseProvider = new DataBaseProvider(process.env.MONGODB_URI);
+const dataBaseProvider = new DataBaseProvider(
+    process.env.MONGODB_URI,
+    process.env.AUTH_SALT,
+);
 
 export default dataBaseProvider;
