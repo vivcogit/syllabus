@@ -4,19 +4,13 @@ import bcryptjs from 'bcryptjs';
 
 class DataBaseProvider {
     cachedDb = null;
-    authSalt = null;
     
-    constructor(dbUri, authSalt) {
+    constructor(dbUri) {
         if (!dbUri) {
             throw new Error('dbUri must be setted!');
         }
 
-        if (!authSalt) {
-            throw new Error('authSalt must be setted!');
-        }
-
         this.dbUri = dbUri;
-        this.authSalt = authSalt;
     }
 
     async getConnectToDatabase() {
@@ -206,9 +200,6 @@ class DataBaseProvider {
     }
 }
 
-const dataBaseProvider = new DataBaseProvider(
-    process.env.MONGODB_URI,
-    process.env.AUTH_SALT,
-);
+const dataBaseProvider = new DataBaseProvider(process.env.MONGODB_URI);
 
 export default dataBaseProvider;
