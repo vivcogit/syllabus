@@ -1,202 +1,104 @@
 import url from 'url';
-import { MongoClient, ObjectID } from 'mongodb';
 import bcryptjs from 'bcryptjs';
+import mongoose from 'mongoose';
+
+import ruleSchema from '../schemas/rule';
+import vocabularySchema from '../schemas/vocabulary';
+import userSchema from '../schemas/user';
 
 class DataBaseProvider {
-    cachedDb = null;
-    
     constructor(dbUri) {
         if (!dbUri) {
             throw new Error('dbUri must be setted!');
         }
 
-        this.dbUri = dbUri;
+        mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
     }
 
-    async getConnectToDatabase() {
-        if (this.cachedDb) {
-            return this.cachedDb;
+    getModel(name, schema, collection) {
+        let model;
+        try {
+            model = mongoose.model(name);
+        } catch (error) {
+            model = mongoose.model(name, schema, collection);
         }
-        
-        const client = await MongoClient.connect(
-            this.dbUri,
-            {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            }
-        );
-        
-        const db = await client.db(url.parse(this.dbUri).pathname.substr(1));
-        
-        this.cachedDb = db;
-        return db;
+
+        return model;
     }
 
-    async getCollection(collection) {
-        const db = await this.getConnectToDatabase();
-        return await db.collection(collection);
+    get Rules() {
+        return this.getModel('rule', ruleSchema);
+    }
+    
+    get Vocabulary() {
+        return this.getModel('vocabulary', vocabularySchema, 'vocabulary');
+
+    }
+
+    get Users() {
+        return this.getModel('user', userSchema);
     }
 
     async getVocabulary() {
-        const collection = await this.getCollection('vocabulary');
-        const vocabulary = await collection.find({}).toArray();
-
-        return vocabulary;
+        return await this.Vocabulary.find();
     }
 
     async insertVocabularyItem(item) {
-        if (!item.word) {
-            throw new Error('Vocabulary item must have a word');
-        }
-
-        if (!item.translation) {
-            throw new Error('Vocabulary item must have a translation');
-        }
-
-        const collection = await this.getCollection('vocabulary');
-        await collection.insert(item);
+        return await this.Vocabulary.create(item);
     }
 
     async updateVocabularyItem(item) {
-        const collection = await this.getCollection('vocabulary');
-        try {
-            const { _id, ...data } = item;
+        const { _id, ...data } = item;
 
-            const res = await collection.replaceOne(
-                { _id: new ObjectID(_id) },
-                data,
-                { upsert: true },
-            );
-            return res.result;
-        } catch (error) {
-            throw error.message;
-        }
+        return await this.Vocabulary.replaceOne(
+            { _id: new ObjectID(_id) },
+            data, 
+            { upsert: true },
+        );
     }
 
     async deleteVocabularyItem(item) {
-        const collection = await this.getCollection('vocabulary');
-        try {
-            const { _id } = item;
+        const { _id } = item;
 
-            const res = await collection.deleteOne(
-                { _id: new ObjectID(_id) }
-            );
-
-            if (!res.result.ok) {
-                throw new Error(res.message);
-            }
-
-            return res.result;
-        } catch (error) {
-            throw error.message;            
-        }
-    }
-
-    async getMenu() {
-        const collection = await this.getCollection('menu');
-        const menu = await collection.find({}).toArray();
-        
-        return menu;
+        return await this.Vocabulary.deleteOne(
+            { _id: new ObjectID(_id) },
+        );
     }
     
     async getRulesForMenu() {
-        const collection = await this.getCollection('rules');
-        const rules = await collection.find(
-            {},
-            { projection: { title: true, href: true } }
-        ).toArray();
-
-        return rules;
+        return await this.Rules.find({}, 'title href');
     }
 
     async getRule(ruleHref) {
-        const collection = await this.getCollection('rules');
-        const rule = await collection.findOne(
-            { href: ruleHref },
-        );
-
-        return rule;
+        return await this.Rules.findOne({ href: ruleHref });
     }
 
     async insertRule(rule) {
-        if (!rule.title) {
-            throw new Error('Rule must have a title');
-        }
-
-        if (!rule.href) {
-            throw new Error('Rule must have a href');
-        }
-
-        const collection = await this.getCollection('rules');
-        const res = await collection.insert(rule);
-
-        if (!res.result.ok) {
-            throw new Error(res.message);
-        }
+        return await this.Rules.create(rule);
     }
 
     async updateRule(rule) {
-        const collection = await this.getCollection('rules');
-        try {
-            const { _id, ...data } = rule;
-
-            const res = await collection.replaceOne(
-                { _id: new ObjectID(_id) },
-                data,
-                { upsert: true },
-            );
-
-            if (!res.result.ok) {
-                throw new Error(res.message);
-            }
-
-            return res.result;
-        } catch (error) {
-            throw error.message;
-        }
+        const { _id, ...data } = rule;
+        
+        return await this.Rules.replaceOne(
+            { _id: new ObjectID(_id) },
+            data,
+            { upsert: true },
+        );
     }
 
     async deleteRule(rule) {
-        const collection = await this.getCollection('rule');
+        const { _id } = item;
 
-        try {
-            const { _id } = item;
-
-            const res = await collection.deleteOne(
-                { _id: new ObjectID(_id) }
-            );
-
-            if (!res.result.ok) {
-                throw new Error(res.message);
-            }
-
-            return res.result;
-        } catch (error) {
-            throw error.message;            
-        }
+        return await this.Rules.deleteOne(
+            { _id: new ObjectID(_id) }
+        );
     }
 
     async insertUser(login, password) {
-        if (!login) {
-            throw new Error('login must be not undefined');
-        }
-
-        if (!password) {
-            throw new Error('password must be not undefined');
-        }
-
         const pwdHash = bcryptjs.hashSync(password);
 
-        const collection = await this.getCollection('users');
-        const res = await collection.insert({
-            login,
-            password: pwdHash,
-            tokens: [],
-        });
-
-        if (!res.result.ok) {
-            throw new Error(res.message);
-        }
+        return await this.Users.create({ login, password: pwdHash });
     }
 }
 

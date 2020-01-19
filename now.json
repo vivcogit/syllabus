@@ -1,6 +1,5 @@
 {
     "env": {
-        "API_URI": "@api_uri",
         "MONGODB_URI": "@mongodb_uri"
     }
 }

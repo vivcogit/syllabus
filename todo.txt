@@ -1,4 +1,5 @@
 update vocabulary after adding item
+lintr!
 add update/delete vocabulary item
 add delete rules
 add check uniq for vocabulary (by word) and for ruls (by link)

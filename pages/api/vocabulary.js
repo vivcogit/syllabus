@@ -8,7 +8,7 @@ export default async (req, res) => {
             
                 res
                     .status(200)
-                    .json({ vocabulary, title: 'Vocabulary', });
+                    .json(vocabulary);
                 break;
             }
             case 'POST': {

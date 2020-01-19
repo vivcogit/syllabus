@@ -9,6 +9,7 @@ import TableHead from '../../components/vocabulary/TableHead';
 
 function Vocabulary(props) {
     const { vocabulary } = props;
+    console.log(props)
 
     const [ filter, setFilter ] = useState('');
     const [ word, setWord ] = useState('');
@@ -95,7 +96,9 @@ function Vocabulary(props) {
     );
 }
 
-Vocabulary.getInitialProps = ({req}) => apiProvider.getVocabulary(req);
+Vocabulary.getInitialProps = async ({ req }) => ({
+    vocabulary: await apiProvider.getVocabulary(req),
+});
 
 Vocabulary.defaultProps = {
     vocabulary: [],

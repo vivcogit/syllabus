@@ -80,12 +80,9 @@ class ApiProvider {
     }
 
     getVocabulary = async (req) => {
-        const data = await this.get('/api/vocabulary', req);
+        const vocabulary = await this.get('/api/vocabulary', req);
 
-        return {
-            ...data,
-            vocabulary: data.vocabulary.sort(sortFabric((item) => item.word)),
-        };
+        return vocabulary.sort(sortFabric((item) => item.word));
     }
 
     postVocabularyItem = async (item, req) => {

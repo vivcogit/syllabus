@@ -26,6 +26,7 @@ function RulePage(props) {
     useEffect(() => {
         async function fetchData() {
             const data = await apiProvider.getRule(ruleHref);
+
             setRule(data);
         }
 
