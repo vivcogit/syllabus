@@ -80,6 +80,10 @@ class ApiProvider {
     getRule = async (rule, req) => {
         return await this.get(`/api/rules/${rule}`, req);
     }
+
+    authUser = async (login, password, req) => {
+        return await this.post('/api/auth', { login, password }, req);
+    }
 }
 
 const apiProvider = new ApiProvider();

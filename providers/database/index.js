@@ -81,6 +81,10 @@ class DataBaseProvider {
     async insertUser(login, password) {
         return await User.create({ login, password });
     }
+
+    async findUserByCredentials(login, password) {
+        return await User.findByCredentials(login, password);
+    }
 }
 
 const dataBaseProvider = new DataBaseProvider(process.env.MONGODB_URI);

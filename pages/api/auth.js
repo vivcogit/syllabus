@@ -2,15 +2,23 @@ import dataBaseProvider from '../../providers/database';
 
 export default async (req, res) => {
     switch (req.method) {
-        case 'PUT': {
+        case 'POST': {
             const { login, password } = req.body;
 
             try {                
-                // const result = await dataBaseProvider.updateRule(rule);
+                const user = await dataBaseProvider.findUserByCredentials(login, password);
+
+                if (!user) {
+                    res
+                        .status(404)
+                        .json({ error: 'User not found or password is incorrect' })
+                        .end();
+                }
 
                 res.status(200)
-                    .json({ success: true, result });
+                    .json({ success: true });
             } catch (error) {
+                console.error(error)
                 res.status(500)
                     .json({ error: error.message });
             }

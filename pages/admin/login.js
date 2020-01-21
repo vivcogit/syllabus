@@ -1,10 +1,15 @@
 import { Pane, TextInputField, Button } from "evergreen-ui";
-import { useState } from "react";
+import { useState, useCallback } from "react";
+
+import apiProvider from "../../providers/api";
 
 function LoginPage() {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
-
+    
+    const onLogin = useCallback(async () => {
+        const res = await apiProvider.authUser(login, password);
+    });
 
     return (
         <Pane paddingX="2em">
@@ -25,7 +30,11 @@ function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
             />
 
-            <Button>Log In</Button>
+            <Button
+                onClick={onLogin}
+            >
+                Log In
+            </Button>
         </Pane>
     );
 }
