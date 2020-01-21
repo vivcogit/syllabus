@@ -1,6 +1,6 @@
-import { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-const ruleSchema = Schema({
+const ruleSchema = mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -25,4 +25,11 @@ const ruleSchema = Schema({
     },
 });
 
-export default ruleSchema;
+let Rule;
+try {
+    Rule = mongoose.model('Rule');
+} catch (error) {
+    Rule = mongoose.model('Rule', ruleSchema);
+}
+
+export default Rule;

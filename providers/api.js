@@ -1,21 +1,5 @@
 import fetch from 'isomorphic-unfetch';
 
-function defaultGetter(item) {
-    return item;
-}
-
-function sortFabric(getter = defaultGetter, sortDirection = 1) {
-    return (itemA, itemB) => {
-        const [a, b] = [getter(itemA), getter(itemB)];
-
-        if (a >= b) {
-            return sortDirection * +(a > b);
-        }
-
-        return -sortDirection;
-    };
-}
-
 function getHostFromReq(req = {}) {
     return req.headers
         ? `${req.headers['x-forwarded-proto']}://${req.headers['x-forwarded-host']}`
@@ -74,15 +58,11 @@ class ApiProvider {
     }
 
     getMenu = async (req) => {
-        const menu = await this.get('/api/menu', req);
-
-        return { menu };
+        return await this.get('/api/menu', req);
     }
 
     getVocabulary = async (req) => {
-        const vocabulary = await this.get('/api/vocabulary', req);
-
-        return vocabulary.sort(sortFabric((item) => item.word));
+        return await this.get('/api/vocabulary', req);
     }
 
     postVocabularyItem = async (item, req) => {

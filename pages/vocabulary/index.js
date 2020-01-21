@@ -9,7 +9,6 @@ import TableHead from '../../components/vocabulary/TableHead';
 
 function Vocabulary(props) {
     const { vocabulary } = props;
-    console.log(props)
 
     const [ filter, setFilter ] = useState('');
     const [ word, setWord ] = useState('');

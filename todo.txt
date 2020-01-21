@@ -1,14 +1,12 @@
 update vocabulary after adding item
-lintr!
-add update/delete vocabulary item
-add delete rules
-add check uniq for vocabulary (by word) and for ruls (by link)
+redirect to created rule
+move sort vocabulary to base query
+linter!
+add update/delete vocabulary item (interface)
+add update/delete rules (interface)
 make api consistent
 TypeScript
-redirect to created rule (?)
 authorization
     https://medium.com/swlh/jwt-authentication-authorization-in-nodejs-express-mongodb-rest-apis-2019-ad14ec818122
-    https://www.npmjs.com/package/bcryptjs
     https://dev.to/jolvera/user-authentication-with-nextjs-4023#backend
-make factory for db actions (with scheme, on create/update check required fields, on delete only id)
 Readme
