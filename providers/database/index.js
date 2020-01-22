@@ -78,7 +78,7 @@ class DataBaseProvider {
         );
     }
 
-    async insertUser(login, password) {
+    async createUser(login, password) {
         return await User.create({ login, password });
     }
 

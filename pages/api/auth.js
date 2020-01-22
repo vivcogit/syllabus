@@ -9,23 +9,22 @@ export default async (req, res) => {
                 const user = await dataBaseProvider.findUserByCredentials(login, password);
 
                 if (!user) {
-                    res
+                    return res
                         .status(404)
-                        .json({ error: 'User not found or password is incorrect' })
-                        .end();
+                        .json({ error: 'User not found or password is incorrect' });
                 }
 
-                res.status(200)
-                    .json({ success: true });
+                const token = await user.generateAuthToken();
+
+                return res.status(200)
+                    .json({ token });
             } catch (error) {
                 console.error(error)
-                res.status(500)
+                return res.status(500)
                     .json({ error: error.message });
             }
-            break;
         }
         default:
-            res.status(405).end();
-            break;
+            return res.status(405).end();
     }
 }

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 const userSchema = mongoose.Schema({
     login: {
@@ -17,7 +18,7 @@ const userSchema = mongoose.Schema({
         }
     },
     tokens: {
-        type: [String],
+        type: [],
         default: [],
     },
 });
@@ -47,13 +48,13 @@ userSchema.statics.findByCredentials = async (login, password) => {
     const user = await User.findOne({ login });
     
     if (!user) {
-        throw new Error('1Invalid login credentials');
+        return null;
     }
     
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     
     if (!isPasswordMatch) {
-        throw new Error('2Invalid login credentials');
+        return null;
     }
     
     return user;

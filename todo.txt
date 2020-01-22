@@ -5,6 +5,5 @@ add update/delete rules (interface)
 make api consistent
 linter or TypeScript !!!
 authorization
-    https://medium.com/swlh/jwt-authentication-authorization-in-nodejs-express-mongodb-rest-apis-2019-ad14ec818122
-    https://dev.to/jolvera/user-authentication-with-nextjs-4023#backend
+    save token (in client app and in local storage)
 Readme
