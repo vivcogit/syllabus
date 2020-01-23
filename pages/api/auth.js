@@ -1,3 +1,5 @@
+import { setCookie } from 'nookies';
+
 import dataBaseProvider from '../../providers/database';
 
 export default async (req, res) => {
@@ -16,8 +18,18 @@ export default async (req, res) => {
 
                 const token = await user.generateAuthToken();
 
+                setCookie(
+                    { res },
+                    'auth_token',
+                    token,
+                    {
+                        maxAge: 30 * 24 * 60 * 60,
+                        path: '/',
+                    }
+                );
+
                 return res.status(200)
-                    .json({ token });
+                    .json({ success: true });
             } catch (error) {
                 console.error(error)
                 return res.status(500)
