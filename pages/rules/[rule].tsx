@@ -15,10 +15,10 @@ import apiProvider from '../../providers/api';
 
 const plugins = {
     content: [slate()],
-    layout: [background({ defaultPlugin: slate(), })],
+    layout: [background({ defaultPlugin: slate(), imageUpload: null, })],
 };
 
-function RulePage(props) {
+function RulePage() {
     const [ rule, setRule ] = useState();
     const router = useRouter();
     const ruleHref = router.query.rule;

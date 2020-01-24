@@ -3,6 +3,17 @@ import {
     TextInput, Table, Button, Spinner,
 } from 'evergreen-ui';
 
+export interface AddItemRowProps {
+    word: string,
+    onChangeWord: (value: string) => void,
+    translation: string,
+    onChangeTranslation: (value: string) => void,
+    example: string,
+    onChangeExample: (value: string) => void,
+    onAdd: () => void,
+    isPending: boolean,
+};
+
 function AddItemRow(props) {
     const {
         word, onChangeWord,
@@ -17,23 +28,23 @@ function AddItemRow(props) {
                 <TextInput
                     placeholder="Word"
                     value={word}
-                    onChange={(e) => onChangeWord(e.target.value)}
-                    />
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeWord(e.target.value)}
+                />
             </Table.Cell>
 
             <Table.Cell>
                 <TextInput
                     placeholder="Translation"
                     value={translation}
-                    onChange={(e) => onChangeTranslation(e.target.value)}
-                    />
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeTranslation(e.target.value)}
+                />
             </Table.Cell>
 
             <Table.Cell>
                 <TextInput
                     placeholder="Example"
                     value={example}
-                    onChange={(e) => onChangeExample(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeExample(e.target.value)}
                 />
             </Table.Cell>
 

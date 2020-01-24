@@ -43,7 +43,7 @@ function Vocabulary(props) {
             toaster.danger('Something went wrong trying to create new rule');
         }
         setIsPending(false);
-    });
+    }, [translation, word, example]);
 
     const usedVocabulary = data.filter((item) => (
         !filter

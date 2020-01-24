@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Pane, TextInput, Button, toaster } from 'evergreen-ui';
 
+import { EditableType } from '@react-page/core';
 import Editor from '@react-page/editor';
 import '@react-page/core/lib/index.css';
 import '@react-page/ui/lib/index.css';
@@ -14,11 +15,21 @@ import apiProvider from '../../../providers/api';
 
 const plugins = {
     content: [slate()],
-    layout: [background({ defaultPlugin: slate(), })],
+    layout: [background({ defaultPlugin: slate(), imageUpload: null })],
 };
 
-function AdminRulePage(props) {
-    const { rule = {} } = props;
+type Rule = {
+    content: EditableType,
+    title: string | undefined,
+    _id: string | undefined,
+};
+
+interface AdminRulePageProps {
+    rule: Rule,
+};
+
+function AdminRulePage(props: AdminRulePageProps) {
+    const { rule } = props;
 
     const [ content, setContent ] = useState(rule.content);
     const [ title, setTitle ] = useState(rule.title);
@@ -47,7 +58,7 @@ function AdminRulePage(props) {
             console.error(error);
             toaster.danger(`Something went wrong trying to ${isUpdateExisted ? 'update' : 'create new'} rule`);
         }
-    });
+    }, [content, title]);
 
     return (
         <Pane padding="2em" minHeight="50em">
@@ -58,7 +69,7 @@ function AdminRulePage(props) {
                 <TextInput
                     placeholder="Input title here..."
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
                 />
 
                 <Button

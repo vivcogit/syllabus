@@ -9,7 +9,7 @@ function LoginPage() {
     
     const onLogin = useCallback(async () => {
         const res = await apiProvider.authUser(login, password);
-    });
+    }, [login, password]);
 
     return (
         <Pane paddingX="2em">
@@ -18,7 +18,7 @@ function LoginPage() {
                 name="log-in"
                 value={login}
                 placeholder="Input your login"
-                onChange={(e) => setLogin(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLogin(e.target.value)}
                 />
 
             <TextInputField
@@ -27,7 +27,7 @@ function LoginPage() {
                 type="password"
                 placeholder="***********"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             />
 
             <Button

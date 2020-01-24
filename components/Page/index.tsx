@@ -1,9 +1,14 @@
-import { Pane, Heading, } from 'evergreen-ui';
+import { Pane } from 'evergreen-ui';
 
-import Menu from '../menu';
+import MyMenu, { MenuDataType } from '../MyMenu';
+
+export interface PageProps {
+    children: React.ReactNode,
+    menu: MenuDataType,
+};
 
 function Page(props) {
-    const { children, title, menu } = props;
+    const { children, menu } = props;
     
     return (
         <Pane
@@ -14,7 +19,7 @@ function Page(props) {
                 border="default"
                 flexBasis="200px"
             >
-                <Menu menu={menu} />
+                <MyMenu menu={menu} />
             </Pane>
 
             {children}

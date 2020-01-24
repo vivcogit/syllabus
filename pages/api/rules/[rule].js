@@ -14,13 +14,13 @@ export default async (req, res) => {
                 }
             } catch (error) {
                 console.log(error);
-                res.status(500),json({ error: error.message });
+                res.status(500).json({ error: error.message });
             }
             break;
         }
         case 'DELETE': {
             try {
-                const result = await dataBaseProvider.deleteRule(req.query.rule);
+                await dataBaseProvider.deleteRule(req.query.rule);
                 res.status(200).end();
             } catch (error) {
                 res.status(500).json({ error: error.message });
