@@ -4,8 +4,8 @@ import {
 } from 'evergreen-ui';
 
 import apiProvider from '../../providers/api';
-import AddItemRow from '../../components/vocabulary/AddItemRow';
-import TableHead from '../../components/vocabulary/TableHead';
+import AddItemRow from '../../components/Vocabulary/AddItemRow';
+import TableHead from '../../components/Vocabulary/TableHead';
 
 function Vocabulary(props) {
     const { vocabulary } = props;

@@ -3,7 +3,6 @@ redirect to created rule
 add update/delete vocabulary item (interface)
 add update/delete rules (interface)
 make api consistent
-linter or TypeScript !!!
+linter
 authorization
-    save token (in client app and in local storage)
 Readme
