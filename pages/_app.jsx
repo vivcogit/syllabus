@@ -1,6 +1,6 @@
 import App from 'next/app';
 
-import Page from '../components/page';
+import Page from '../components/Page';
 import apiProvider from '../providers/api';
 
 class MyApp extends App {
