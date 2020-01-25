@@ -1,6 +1,6 @@
 import { Menu } from 'evergreen-ui';
 
-export interface MyMenuGroupProps {
+interface MyMenuGroupProps {
     title: string,
     children: React.ReactNode,
 };

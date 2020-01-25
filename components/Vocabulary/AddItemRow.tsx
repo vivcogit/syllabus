@@ -3,7 +3,7 @@ import {
     TextInput, Table, Button, Spinner,
 } from 'evergreen-ui';
 
-export interface AddItemRowProps {
+interface AddItemRowProps {
     word: string,
     onChangeWord: (value: string) => void,
     translation: string,

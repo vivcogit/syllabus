@@ -6,6 +6,12 @@ import {
 import apiProvider from '../../providers/api';
 import AddItemRow from '../../components/Vocabulary/AddItemRow';
 import TableHead from '../../components/Vocabulary/TableHead';
+import { VocabularyData } from '../../types/vocabulary';
+import { NextPageContext } from 'next';
+
+interface VocabularyProps {
+    vocabulary: VocabularyData,
+};
 
 function Vocabulary(props) {
     const { vocabulary } = props;
@@ -23,6 +29,7 @@ function Vocabulary(props) {
 
     const addItem = useCallback(async () => {
         setIsPending(true);
+
         const newItem = {
             translation,
             word,
@@ -30,10 +37,8 @@ function Vocabulary(props) {
         };
         
         try {
-            console.log(newItem);
-            const result = await apiProvider.postVocabularyItem(newItem);
+            await apiProvider.postVocabularyItem(newItem);
             
-            console.log(result);
             toaster.success('Word was created successfully');
             setWord('');
             setTranslation('');
@@ -45,7 +50,7 @@ function Vocabulary(props) {
         setIsPending(false);
     }, [translation, word, example]);
 
-    const usedVocabulary = data.filter((item) => (
+    const usedVocabulary: VocabularyData = data.filter((item) => (
         !filter
             || item.word.indexOf(filter) >= 0
             || item.translation.indexOf(filter) >= 0
@@ -95,7 +100,7 @@ function Vocabulary(props) {
     );
 }
 
-Vocabulary.getInitialProps = async ({ req }) => ({
+Vocabulary.getInitialProps = async ({ req }: NextPageContext) => ({
     vocabulary: await apiProvider.getVocabulary(req),
 });
 

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Menu, Link as LinkUI, } from 'evergreen-ui';
 
-export interface MyMenuLinkProps {
+interface MyMenuLinkProps {
     title: string,
     href: string,
 };

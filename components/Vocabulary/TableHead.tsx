@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'evergreen-ui';
 
-export interface TableHeadProps {
+interface TableHeadProps {
     filter: string,
     onChangeFilter: (value: string) => void,
 };

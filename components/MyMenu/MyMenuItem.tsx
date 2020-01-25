@@ -2,32 +2,17 @@ import { Menu } from 'evergreen-ui';
 
 import MyMenuLink from './MyMenuLink';
 import MyMenuGroup from './MyMenuGroup';
+import { MenuItem, MenuItemType } from '../../types/menu';
 
-enum MyMenuItemType {
-    Group = 'group',
-    Link = 'link',
-    Divider = 'divider',
-};
-
-export type MenuDataItemType = {
-    type: MyMenuItemType,
-    items: Array<{
-        title: string | undefined,
-        href: string | undefined,
-    }>,
-    title: string | undefined,
-    href: string | undefined,
-};
-
-export interface MyMenuItemProps {
-    item: MenuDataItemType,
+interface MyMenuItemProps {
+    item: MenuItem,
 };
 
 function MyMenuItem(props: MyMenuItemProps) {
     const { item } = props;
 
     switch (item.type) {
-        case MyMenuItemType.Group:
+        case MenuItemType.Group:
             return (
                 <MyMenuGroup title={item.title}>
                     {item.items.map((innerItem, ix) => (
@@ -39,14 +24,14 @@ function MyMenuItem(props: MyMenuItemProps) {
                     ))}
                 </MyMenuGroup>
             );
-        case MyMenuItemType.Link:
+        case MenuItemType.Link:
             return (
                 <MyMenuLink
                     title={item.title}
                     href={item.href}
                 />
             );
-        case MyMenuItemType.Divider:
+        case MenuItemType.Divider:
             return (
                 <Menu.Divider />
             );

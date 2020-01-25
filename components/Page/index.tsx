@@ -1,10 +1,11 @@
 import { Pane } from 'evergreen-ui';
 
-import MyMenu, { MenuDataType } from '../MyMenu';
+import MyMenu from '../MyMenu';
+import { MenuData } from '../../types/menu';
 
 export interface PageProps {
     children: React.ReactNode,
-    menu: MenuDataType,
+    menu: MenuData,
 };
 
 function Page(props) {

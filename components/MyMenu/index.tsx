@@ -1,11 +1,10 @@
 import { Menu } from 'evergreen-ui';
 
-import MyMenuItem, { MenuDataItemType } from './MyMenuItem';
+import MyMenuItem from './MyMenuItem';
+import { MenuData } from '../../types/menu';
 
-export type MenuDataType = Array<MenuDataItemType>;
-
-export interface MyMenuProps {
-    menu: MenuDataType,
+interface MyMenuProps {
+    menu: MenuData,
 };
 
 function MyMenu(props: MyMenuProps) {
