@@ -1,4 +1,4 @@
-import { Document, Model } from 'mongoose';
+import mongoose from 'mongoose';
 
 export interface IVocabularyItemData {
     word: string;
@@ -10,9 +10,9 @@ export interface IVocabularyItem extends IVocabularyItemData {
     _id?: string;
 }
 
-export interface IVocabularyItemDocument extends IVocabularyItemData, Document { }
+export interface IVocabularyItemDocument extends IVocabularyItemData, mongoose.Document { }
 
-export type IVocabularyItemModel = Model<IVocabularyItemDocument>
+export type IVocabularyItemModel = mongoose.Model<IVocabularyItemDocument>
 
 export type IVocabularyDocuments = Array<IVocabularyItemDocument>;
 

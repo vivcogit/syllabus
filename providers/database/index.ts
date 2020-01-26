@@ -33,19 +33,19 @@ class DataBaseProvider {
         return await Vocabulary.create(item);
     }
 
-    async updateVocabularyItem(item: IVocabularyItemDocument) {
+    async updateVocabularyItem(item: IVocabularyItemDocument): Promise<void> {
         const { _id, ...data } = item;
 
-        return await Vocabulary.replaceOne(
+        await Vocabulary.replaceOne(
             { _id: new mongoose.Types.ObjectId(_id) },
             data,
         );
     }
 
-    async deleteVocabularyItem(item: IVocabularyItemDocument) {
+    async deleteVocabularyItem(item: IVocabularyItemDocument): Promise<void> {
         const { _id } = item;
 
-        return await Vocabulary.deleteOne(
+        await Vocabulary.deleteOne(
             { _id: new mongoose.Types.ObjectId(_id) },
         );
     }
@@ -58,24 +58,16 @@ class DataBaseProvider {
         return await Rule.findOne({ href: ruleHref });
     }
 
-    async insertRule(rule: IRule): Promise<IRuleDocument> {
-        return await Rule.create(rule);
+    async insertRule(rule: IRule): Promise<void> {
+        await Rule.create(rule);
     }
 
-    async updateRule(rule: IRule) {
+    async updateRule(rule: IRule): Promise<void> {
         const { _id, ...data } = rule;
         
-        return await Rule.replaceOne(
+        await Rule.replaceOne(
             { _id: new mongoose.Types.ObjectId(_id) },
             data,
-        );
-    }
-
-    async deleteRule(rule: IRule) {
-        const { _id } = rule;
-
-        return await Rule.deleteOne(
-            { _id: new mongoose.Types.ObjectId(_id) }
         );
     }
 

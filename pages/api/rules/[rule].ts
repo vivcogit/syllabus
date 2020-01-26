@@ -1,10 +1,18 @@
 import dataBaseProvider from '../../../providers/database';
+import { NextApiResponse, NextApiRequest } from 'next';
+import { IRuleDocument } from '../../../types/rule';
 
-export default async (req, res) => {
+function handleQueryParam(param: string[] | string): string {
+    return Array.isArray(param)
+        ? param[0]
+        : param;
+}
+
+export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
     switch (req.method) {
         case 'GET': {
             try {
-                const rule = await dataBaseProvider.getRule(req.query.rule);
+                const rule = await dataBaseProvider.getRule(handleQueryParam(req.query.rule));
     
                 if (rule) {
                     res.status(200)
@@ -20,11 +28,18 @@ export default async (req, res) => {
         }
         case 'DELETE': {
             try {
-                await dataBaseProvider.deleteRule(req.query.rule);
+                const rule: IRuleDocument = await dataBaseProvider.getRule(handleQueryParam(req.query.rule));
+
+                if (!rule) {
+                    res.status(404).end();
+                }
+
+                await rule.remove();
                 res.status(200).end();
             } catch (error) {
                 res.status(500).json({ error: error.message });
             }
+            break;
         }
         default:
             res.status(405).end();

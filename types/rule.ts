@@ -1,4 +1,4 @@
-import { Document } from 'mongoose';
+import mongoose from 'mongoose';
 import { EditableType } from '@react-page/core';
 
 interface IRuleData {
@@ -11,7 +11,7 @@ export interface IRule extends IRuleData {
     _id?: string;
 }
 
-export interface IRuleDocument extends IRuleData, Document {}
+export interface IRuleDocument extends IRuleData, mongoose.Document {}
 
 export interface IShortRule {
     title: IRule['title'];

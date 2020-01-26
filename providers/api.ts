@@ -82,15 +82,18 @@ class ApiProvider {
         return await this.get('/api/vocabulary', req);
     }
 
-    postVocabularyItem = async (item: IVocabularyItem, req?: IncomingMessage) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    postVocabularyItem = async (item: IVocabularyItem, req?: IncomingMessage): Promise<any> => {
         return await this.post('/api/vocabulary', item, req);
     }
 
-    postRule = async (rule: IRule, req?: IncomingMessage) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    postRule = async (rule: IRule, req?: IncomingMessage): Promise<any> => {
         return await this.post('/api/rules', rule, req);
     }
 
-    putRule = async (rule: IRule, req?: IncomingMessage) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    putRule = async (rule: IRule, req?: IncomingMessage): Promise<any> => {
         return await this.put('/api/rules', rule, req);
     }
 
