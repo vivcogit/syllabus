@@ -1,13 +1,14 @@
+import { ReactElement } from 'react';
 import { Menu } from 'evergreen-ui';
 
 import MyMenuItem from './MyMenuItem';
-import { MenuData } from '../../types/menu';
+import { IMenuData } from '../../types/menu';
 
-interface MyMenuProps {
-    menu: MenuData,
-};
+interface IMyMenuProps {
+    menu: IMenuData;
+}
 
-function MyMenu(props: MyMenuProps) {
+function MyMenu(props: IMyMenuProps): ReactElement {
     const { menu } = props;
 
     return (

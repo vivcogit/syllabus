@@ -1,15 +1,16 @@
+import { ReactElement } from 'react';
 import { Menu } from 'evergreen-ui';
 
-interface MyMenuGroupProps {
-    title: string,
-    children: React.ReactNode,
-};
+interface IMyMenuGroupProps {
+    title: string;
+    children: React.ReactNode;
+}
 
-function MyMenuGroup(props) {
+function MyMenuGroup(props: IMyMenuGroupProps): ReactElement {
     const { title, children } = props;
 
     return (
-        <Menu.Group title={title}>
+        <Menu.Group title={<>{title}</>}>
             {children}
         </Menu.Group>
     );

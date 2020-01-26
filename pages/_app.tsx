@@ -2,15 +2,18 @@ import { AppContext } from 'next/app';
 
 import Page from '../components/Page';
 import apiProvider from '../providers/api';
-import { MenuData } from '../types/menu';
+import { IMenuData } from '../types/menu';
+import { ReactElement } from 'react';
 
-interface MyAppProps extends AppContext {
-    menu: MenuData,
-    pageProps: any,
-};
+interface IMyAppPropsRaw {
+    menu: IMenuData;
+    pageProps?: object;
+}
 
-function MyApp(props: MyAppProps) {
-    const { menu, Component, pageProps } = props;
+interface IMyAppProps extends AppContext, IMyAppPropsRaw {}
+
+function MyApp(props: IMyAppProps): ReactElement {
+    const { menu, Component, pageProps = {} } = props;
 
     return (
         <Page menu={menu}>
@@ -19,7 +22,7 @@ function MyApp(props: MyAppProps) {
     );
 }
 
-MyApp.getInitialProps = async (context: AppContext) => {
+MyApp.getInitialProps = async (context: AppContext): Promise<IMyAppPropsRaw> => {
     const { Component, ctx } = context;
     const menu = await apiProvider.getMenu(ctx.req);
     
@@ -32,7 +35,7 @@ MyApp.getInitialProps = async (context: AppContext) => {
         }
     }
 
-    return { menu, pageProps: {} };
+    return { menu };
 }
 
 export default MyApp;

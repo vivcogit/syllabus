@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import { IRule } from '../../../types/rule';
+import { IRuleDocument } from '../../../types/rule';
 
 const ruleSchema = new mongoose.Schema({
     title: {
@@ -29,7 +29,7 @@ const ruleSchema = new mongoose.Schema({
     },
 });
 
-let Rule: mongoose.Model<IRule>;
+let Rule: mongoose.Model<IRuleDocument>;
 try {
     Rule = mongoose.model('Rule');
 } catch (error) {

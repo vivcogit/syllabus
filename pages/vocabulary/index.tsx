@@ -1,19 +1,21 @@
-import { useState, useEffect, useCallback } from 'react';
 import {
-    Heading, Pane, Table, TextInput, Button, toaster,
+    useState, useEffect, useCallback, ReactElement,
+} from 'react';
+import {
+    Heading, Pane, Table, toaster,
 } from 'evergreen-ui';
 
 import apiProvider from '../../providers/api';
 import AddItemRow from '../../components/Vocabulary/AddItemRow';
 import TableHead from '../../components/Vocabulary/TableHead';
-import { IVocabulary } from '../../types/vocabulary';
+import { IVocabularyItem } from '../../types/vocabulary';
 import { NextPageContext } from 'next';
 
-interface VocabularyProps {
-    vocabulary: IVocabulary,
-};
+interface IVocabularyProps {
+    vocabulary: Array<IVocabularyItem>;
+}
 
-function Vocabulary(props: VocabularyProps) {
+function Vocabulary(props: IVocabularyProps): ReactElement {
     const { vocabulary } = props;
 
     const [ filter, setFilter ] = useState('');
@@ -30,7 +32,7 @@ function Vocabulary(props: VocabularyProps) {
     const addItem: () => void = useCallback(async () => {
         setIsPending(true);
 
-        const newItem = {
+        const newItem: IVocabularyItem = {
             translation,
             word,
             example,
@@ -50,7 +52,7 @@ function Vocabulary(props: VocabularyProps) {
         setIsPending(false);
     }, [translation, word, example]);
 
-    const usedVocabulary: IVocabulary = data.filter((item) => (
+    const usedVocabulary: Array<IVocabularyItem> = data.filter((item) => (
         !filter
             || item.word.indexOf(filter) >= 0
             || item.translation.indexOf(filter) >= 0
@@ -100,7 +102,7 @@ function Vocabulary(props: VocabularyProps) {
     );
 }
 
-Vocabulary.getInitialProps = async ({ req }: NextPageContext) => ({
+Vocabulary.getInitialProps = async ({ req }: NextPageContext): Promise<IVocabularyProps> => ({
     vocabulary: await apiProvider.getVocabulary(req),
 });
 

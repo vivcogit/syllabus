@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
     TextInput, Table, Button, Spinner,
 } from 'evergreen-ui';
 import { IVocabularyItem } from '../../types/vocabulary';
 
-interface AddItemRowProps {
-    word: IVocabularyItem['word'],
-    onChangeWord: (value: IVocabularyItem['word']) => void,
-    translation: IVocabularyItem['translation'],
-    onChangeTranslation: (value: IVocabularyItem['translation']) => void,
-    example: IVocabularyItem['example'],
-    onChangeExample: (value: IVocabularyItem['example']) => void,
-    onAdd: () => void,
-    isPending: boolean,
-};
+interface IAddItemRowProps {
+    word: IVocabularyItem['word'];
+    onChangeWord: (value: IVocabularyItem['word']) => void;
+    translation: IVocabularyItem['translation'];
+    onChangeTranslation: (value: IVocabularyItem['translation']) => void;
+    example: IVocabularyItem['example'];
+    onChangeExample: (value: IVocabularyItem['example']) => void;
+    onAdd: () => void;
+    isPending: boolean;
+}
 
-function AddItemRow(props: AddItemRowProps) {
+function AddItemRow(props: IAddItemRowProps): ReactElement {
     const {
         word, onChangeWord,
         translation, onChangeTranslation,
@@ -29,7 +29,7 @@ function AddItemRow(props: AddItemRowProps) {
                 <TextInput
                     placeholder="Word"
                     value={word}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeWord(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => onChangeWord(e.target.value)}
                 />
             </Table.Cell>
 
@@ -37,7 +37,7 @@ function AddItemRow(props: AddItemRowProps) {
                 <TextInput
                     placeholder="Translation"
                     value={translation}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeTranslation(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => onChangeTranslation(e.target.value)}
                 />
             </Table.Cell>
 
@@ -45,7 +45,7 @@ function AddItemRow(props: AddItemRowProps) {
                 <TextInput
                     placeholder="Example"
                     value={example}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeExample(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => onChangeExample(e.target.value)}
                 />
             </Table.Cell>
 

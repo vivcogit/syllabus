@@ -1,12 +1,12 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Table } from 'evergreen-ui';
 
-interface TableHeadProps {
-    filter: string,
-    onChangeFilter: (value: string) => void,
-};
+interface ITableHeadProps {
+    filter: string;
+    onChangeFilter: (value: string) => void;
+}
 
-function TableHead(props: TableHeadProps) {
+function TableHead(props: ITableHeadProps): ReactElement {
     const { filter, onChangeFilter } = props;
 
     return (

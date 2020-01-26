@@ -1,10 +1,12 @@
+/* global process */
 import mongoose from 'mongoose';
 
 import Vocabulary from './models/vocabulary';
 import User from './models/user';
-import { IVocabulary, IVocabularyItem } from '../../types/vocabulary';
-import { IRule, IShortRule } from '../../types/rule';
+import { IVocabularyDocuments, IVocabularyItem, IVocabularyItemDocument } from '../../types/vocabulary';
+import { IRuleDocument, IShortRule, IRule } from '../../types/rule';
 import Rule from './models/rule';
+import { IUserDocument } from '../../types/user';
 
 class DataBaseProvider {
     constructor(dbUri: string) {
@@ -19,7 +21,7 @@ class DataBaseProvider {
         });
     }
 
-    async getVocabulary(): Promise<IVocabulary> {
+    async getVocabulary(): Promise<IVocabularyDocuments> {
         return await Vocabulary.find(
             {},
             ['word', 'translation', 'example'],
@@ -27,11 +29,11 @@ class DataBaseProvider {
         );
     }
 
-    async insertVocabularyItem(item: IVocabularyItem) {
+    async insertVocabularyItem(item: IVocabularyItem): Promise<IVocabularyItemDocument> {
         return await Vocabulary.create(item);
     }
 
-    async updateVocabularyItem(item: IVocabularyItem) {
+    async updateVocabularyItem(item: IVocabularyItemDocument) {
         const { _id, ...data } = item;
 
         return await Vocabulary.replaceOne(
@@ -40,7 +42,7 @@ class DataBaseProvider {
         );
     }
 
-    async deleteVocabularyItem(item: IVocabularyItem) {
+    async deleteVocabularyItem(item: IVocabularyItemDocument) {
         const { _id } = item;
 
         return await Vocabulary.deleteOne(
@@ -52,11 +54,11 @@ class DataBaseProvider {
         return await Rule.find({}, 'title href');
     }
 
-    async getRule(ruleHref: string): Promise<IRule> {
+    async getRule(ruleHref: string): Promise<IRuleDocument> {
         return await Rule.findOne({ href: ruleHref });
     }
 
-    async insertRule(rule: IRule) {
+    async insertRule(rule: IRule): Promise<IRuleDocument> {
         return await Rule.create(rule);
     }
 
@@ -77,11 +79,11 @@ class DataBaseProvider {
         );
     }
 
-    async createUser(login: string, password: string) {
+    async createUser(login: string, password: string): Promise<IUserDocument> {
         return await User.create({ login, password });
     }
 
-    async findUserByCredentials(login: string, password: string) {
+    async findUserByCredentials(login: string, password: string): Promise<IUserDocument> {
         return await User.findByCredentials(login, password);
     }
 }

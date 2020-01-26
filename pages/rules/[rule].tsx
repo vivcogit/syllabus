@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import { Pane } from 'evergreen-ui';
 
@@ -18,13 +18,15 @@ const plugins = {
     layout: [background({ defaultPlugin: slate(), imageUpload: null, })],
 };
 
-function RulePage() {
+function RulePage(): ReactElement {
     const [ rule, setRule ] = useState();
     const router = useRouter();
-    const ruleHref = router.query.rule;
+    const ruleHref = Array.isArray(router.query.rule)
+        ? router.query.rule[0]
+        : router.query.rule;
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchData(): Promise<void> {
             const data = await apiProvider.getRule(ruleHref);
 
             setRule(data);

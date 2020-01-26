@@ -1,15 +1,21 @@
 import { Document } from 'mongoose';
 import { EditableType } from '@react-page/core';
 
-export interface IRule extends Document {
+interface IRuleData {
     title: string;
     href: string;
     content: EditableType;
 }
 
-export type IShortRule = {
-    title: IRule['title'],
-    href: IRule['href'],
-};
+export interface IRule extends IRuleData {
+    _id?: string;
+}
 
-export type RulesData = Array<IRule>;
+export interface IRuleDocument extends IRuleData, Document {}
+
+export interface IShortRule {
+    title: IRule['title'];
+    href: IRule['href'];
+}
+
+export type RulesData = Array<IRuleDocument>;

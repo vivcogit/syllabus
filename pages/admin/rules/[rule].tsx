@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, ReactElement } from 'react';
 import { Pane, TextInput, Button, toaster } from 'evergreen-ui';
 
 import Editor from '@react-page/editor';
@@ -12,24 +12,25 @@ import '@react-page/plugins-background/lib/index.css';
 
 import apiProvider from '../../../providers/api';
 import { IRule } from '../../../types/rule';
+import { NextPageContext } from 'next';
 
 const plugins = {
     content: [slate()],
     layout: [background({ defaultPlugin: slate(), imageUpload: null })],
 };
 
-interface AdminRulePageProps {
-    rule: IRule,
-};
+interface IAdminRulePageProps {
+    rule: IRule;
+}
 
-function AdminRulePage(props: AdminRulePageProps) {
+function AdminRulePage(props: IAdminRulePageProps): ReactElement {
     const { rule } = props;
 
     const [ content, setContent ] = useState(rule.content);
     const [ title, setTitle ] = useState(rule.title);
 
     const saveRule = useCallback(async () => {
-        const ruleForSave = {
+        const ruleForSave: IRule = {
             content,
             title,
             href: title.toLowerCase().replace(/ /g, '_'),
@@ -63,7 +64,7 @@ function AdminRulePage(props: AdminRulePageProps) {
                 <TextInput
                     placeholder="Input title here..."
                     value={title}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setTitle(e.target.value)}
                 />
 
                 <Button
@@ -87,9 +88,10 @@ function AdminRulePage(props: AdminRulePageProps) {
     );
 }
 
-AdminRulePage.getInitialProps = async ({ query, req }) => {
+AdminRulePage.getInitialProps = async ({ query, req }: NextPageContext): Promise<IAdminRulePageProps> => {
     if (query.rule !== 'new') {
-        const rule = await apiProvider.getRule(query.rule, req);
+        const ruleHref = Array.isArray(query.rule) ? query.rule[0] : query.rule;
+        const rule = await apiProvider.getRule(ruleHref, req);
         return { rule };
     }
 }

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { IVocabularyItem } from '../../../types/vocabulary';
+import { IVocabularyItemDocument } from '../../../types/vocabulary';
 
 const vocabularySchema = new mongoose.Schema({
     word: {
@@ -18,7 +18,7 @@ const vocabularySchema = new mongoose.Schema({
     },
 });
 
-let Vocabulary: mongoose.Model<IVocabularyItem>;
+let Vocabulary: mongoose.Model<IVocabularyItemDocument>;
 try {
     Vocabulary = mongoose.model('Vocabulary');
 } catch (error) {

@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, ReactElement } from 'react';
 import Router from 'next/router';
 import { Spinner } from 'evergreen-ui';
 
-function Index() {
+function Index(): ReactElement {
     useEffect(() => {
         Router.push('/vocabulary');
     })

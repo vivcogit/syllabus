@@ -1,14 +1,15 @@
 import { Pane } from 'evergreen-ui';
 
 import MyMenu from '../MyMenu';
-import { MenuData } from '../../types/menu';
+import { IMenuData } from '../../types/menu';
+import { ReactElement } from 'react';
 
-export interface PageProps {
-    children: React.ReactNode,
-    menu: MenuData,
-};
+interface IPageProps {
+    children: React.ReactNode;
+    menu: IMenuData;
+}
 
-function Page(props) {
+function Page(props: IPageProps): ReactElement {
     const { children, menu } = props;
     
     return (

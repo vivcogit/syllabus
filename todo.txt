@@ -2,7 +2,6 @@ update vocabulary after adding item
 redirect to created rule
 add update/delete vocabulary item (interface)
 add update/delete rules (interface)
-make api consistent
-linter
+handle db response and make common response type
 authorization
 Readme

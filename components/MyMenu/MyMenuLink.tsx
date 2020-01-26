@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { Menu, Link as LinkUI, } from 'evergreen-ui';
+import { ReactElement } from 'react';
 
-interface MyMenuLinkProps {
-    title: string,
-    href: string,
-};
+interface IMyMenuLinkProps {
+    title: string;
+    href: string;
+}
 
-function MyMenuLink(props: MyMenuLinkProps) {
+function MyMenuLink(props: IMyMenuLinkProps): ReactElement {
     const { title, href } = props;
 
     return (
