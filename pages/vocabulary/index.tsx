@@ -27,7 +27,7 @@ function Vocabulary(props: VocabularyProps) {
         setData(vocabulary);
     }, []);
 
-    const addItem: Function = useCallback(async () => {
+    const addItem: () => void = useCallback(async () => {
         setIsPending(true);
 
         const newItem = {
