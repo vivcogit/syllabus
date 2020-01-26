@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 
-const ruleSchema = mongoose.Schema({
+import { IRule } from '../../../types/rule';
+
+const ruleSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -10,10 +12,12 @@ const ruleSchema = mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        validate: (value) => {
+        validate: (value: string): boolean => {
             if (value.indexOf(' ') >= 0) {
                 throw new Error('href must be a valid path of URI');
             }
+
+            return true;
         }
     },
     content: {
@@ -25,7 +29,7 @@ const ruleSchema = mongoose.Schema({
     },
 });
 
-let Rule;
+let Rule: mongoose.Model<IRule>;
 try {
     Rule = mongoose.model('Rule');
 } catch (error) {

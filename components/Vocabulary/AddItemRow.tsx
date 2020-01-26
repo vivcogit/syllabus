@@ -2,19 +2,20 @@ import React from 'react';
 import {
     TextInput, Table, Button, Spinner,
 } from 'evergreen-ui';
+import { IVocabularyItem } from '../../types/vocabulary';
 
 interface AddItemRowProps {
-    word: string,
-    onChangeWord: (value: string) => void,
-    translation: string,
-    onChangeTranslation: (value: string) => void,
-    example: string,
-    onChangeExample: (value: string) => void,
+    word: IVocabularyItem['word'],
+    onChangeWord: (value: IVocabularyItem['word']) => void,
+    translation: IVocabularyItem['translation'],
+    onChangeTranslation: (value: IVocabularyItem['translation']) => void,
+    example: IVocabularyItem['example'],
+    onChangeExample: (value: IVocabularyItem['example']) => void,
     onAdd: () => void,
     isPending: boolean,
 };
 
-function AddItemRow(props) {
+function AddItemRow(props: AddItemRowProps) {
     const {
         word, onChangeWord,
         translation, onChangeTranslation,

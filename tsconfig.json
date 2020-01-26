@@ -24,6 +24,6 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "pages/_app.tsxbase/index.js", "providers/database/models/rule.js", "providers/database/models/user.js", "providers/database/models/vocabulary.js", "providers/api.js", "pages/_app.jsx"
+    "**/*.tsx",
   ]
 }

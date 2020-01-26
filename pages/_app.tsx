@@ -2,12 +2,14 @@ import { AppContext } from 'next/app';
 
 import Page from '../components/Page';
 import apiProvider from '../providers/api';
+import { MenuData } from '../types/menu';
 
 interface MyAppProps extends AppContext {
-    menu: any,
+    menu: MenuData,
+    pageProps: any,
 };
 
-function MyApp(props) {
+function MyApp(props: MyAppProps) {
     const { menu, Component, pageProps } = props;
 
     return (

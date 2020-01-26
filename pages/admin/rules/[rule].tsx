@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Pane, TextInput, Button, toaster } from 'evergreen-ui';
 
-import { EditableType } from '@react-page/core';
 import Editor from '@react-page/editor';
 import '@react-page/core/lib/index.css';
 import '@react-page/ui/lib/index.css';
@@ -12,20 +11,15 @@ import background from '@react-page/plugins-background';
 import '@react-page/plugins-background/lib/index.css';
 
 import apiProvider from '../../../providers/api';
+import { IRule } from '../../../types/rule';
 
 const plugins = {
     content: [slate()],
     layout: [background({ defaultPlugin: slate(), imageUpload: null })],
 };
 
-type Rule = {
-    content: EditableType,
-    title: string | undefined,
-    _id: string | undefined,
-};
-
 interface AdminRulePageProps {
-    rule: Rule,
+    rule: IRule,
 };
 
 function AdminRulePage(props: AdminRulePageProps) {

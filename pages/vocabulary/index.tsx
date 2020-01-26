@@ -6,28 +6,28 @@ import {
 import apiProvider from '../../providers/api';
 import AddItemRow from '../../components/Vocabulary/AddItemRow';
 import TableHead from '../../components/Vocabulary/TableHead';
-import { VocabularyData } from '../../types/vocabulary';
+import { IVocabulary } from '../../types/vocabulary';
 import { NextPageContext } from 'next';
 
 interface VocabularyProps {
-    vocabulary: VocabularyData,
+    vocabulary: IVocabulary,
 };
 
-function Vocabulary(props) {
+function Vocabulary(props: VocabularyProps) {
     const { vocabulary } = props;
 
     const [ filter, setFilter ] = useState('');
     const [ word, setWord ] = useState('');
     const [ translation, setTranslation ] = useState('');
     const [ example, setExample ] = useState('');
-    const [ isPenging, setIsPending ] = useState(false);
+    const [ isPending, setIsPending ] = useState(false);
     const [ data, setData ] = useState([]);
 
-    useEffect(() => {
+    useEffect((): void => {
         setData(vocabulary);
     }, []);
 
-    const addItem = useCallback(async () => {
+    const addItem: Function = useCallback(async () => {
         setIsPending(true);
 
         const newItem = {
@@ -50,7 +50,7 @@ function Vocabulary(props) {
         setIsPending(false);
     }, [translation, word, example]);
 
-    const usedVocabulary: VocabularyData = data.filter((item) => (
+    const usedVocabulary: IVocabulary = data.filter((item) => (
         !filter
             || item.word.indexOf(filter) >= 0
             || item.translation.indexOf(filter) >= 0
@@ -84,7 +84,7 @@ function Vocabulary(props) {
                         onChangeTranslation={setTranslation}
                         onChangeExample={setExample}
                         onAdd={addItem}
-                        isPenging={isPenging}
+                        isPending={isPending}
                     />
 
                     {usedVocabulary.map((row) => (
