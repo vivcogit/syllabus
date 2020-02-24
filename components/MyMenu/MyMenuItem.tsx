@@ -1,9 +1,9 @@
 import { ReactElement } from 'react';
-import { Menu } from 'evergreen-ui';
 
 import MyMenuLink from './MyMenuLink';
-import MyMenuGroup from './MyMenuGroup';
+import MenuDivider from './MenuDivider';
 import { IMenuItem, MenuItemType } from '../../types/menu';
+import MenuGroup from './MenuGroup';
 
 interface IMyMenuItemProps {
     item: IMenuItem;
@@ -15,7 +15,7 @@ function MyMenuItem(props: IMyMenuItemProps): ReactElement {
     switch (item.type) {
         case MenuItemType.Group:
             return (
-                <MyMenuGroup title={item.title}>
+                <MenuGroup title={item.title}>
                     {item.items.map((innerItem, ix) => (
                         <MyMenuLink
                             key={ix}
@@ -23,7 +23,7 @@ function MyMenuItem(props: IMyMenuItemProps): ReactElement {
                             href={innerItem.href}
                         />
                     ))}
-                </MyMenuGroup>
+                </MenuGroup>
             );
         case MenuItemType.Link:
             return (
@@ -34,7 +34,7 @@ function MyMenuItem(props: IMyMenuItemProps): ReactElement {
             );
         case MenuItemType.Divider:
             return (
-                <Menu.Divider />
+                <MenuDivider />
             );
         default:
             throw new Error(`Unknown menu item data: ${item}`);

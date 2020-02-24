@@ -5,3 +5,4 @@ add update/delete rules (interface)
 handle db response and make common response type
 authorization
 Readme
+use readonly fields

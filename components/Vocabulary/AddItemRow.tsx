@@ -1,8 +1,9 @@
 import React, { ReactElement } from 'react';
 import {
-    TextInput, Table, Button, Spinner,
+    TextInput, Table, Spinner,
 } from 'evergreen-ui';
 import { IVocabularyItem } from '../../types/vocabulary';
+import Button from '../Button';
 
 interface IAddItemRowProps {
     word: IVocabularyItem['word'];

@@ -1,0 +1,14 @@
+.menuGroup {
+  padding: 8px 0;
+
+  &-title {
+    margin: 8px 16px;
+    color: #66788A;
+    letter-spacing: 0.6px;
+    line-height: 16px;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 11px;
+    font-family: 'SF UI Text', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial;
+  }
+}

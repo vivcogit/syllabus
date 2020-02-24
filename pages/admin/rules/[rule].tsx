@@ -26,8 +26,8 @@ interface IAdminRulePageProps {
 function AdminRulePage(props: IAdminRulePageProps): ReactElement {
     const { rule } = props;
 
-    const [ content, setContent ] = useState(rule.content);
-    const [ title, setTitle ] = useState(rule.title);
+    const [ content, setContent ] = useState(rule?.content);
+    const [ title, setTitle ] = useState(rule?.title || '');
 
     const saveRule = useCallback(async () => {
         const ruleForSave: IRule = {

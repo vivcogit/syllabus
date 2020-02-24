@@ -1,8 +1,9 @@
-import { Pane } from 'evergreen-ui';
+import { ReactElement } from 'react';
 
 import MyMenu from '../MyMenu';
 import { IMenuData } from '../../types/menu';
-import { ReactElement } from 'react';
+
+import './page.scss';
 
 interface IPageProps {
     children: React.ReactNode;
@@ -13,19 +14,13 @@ function Page(props: IPageProps): ReactElement {
     const { children, menu } = props;
     
     return (
-        <Pane
-            display="flex"
-            alignItems="baseline"
-        >
-            <Pane
-                border="default"
-                flexBasis="200px"
-            >
+        <div className="page">
+            <div className="page-menu">
                 <MyMenu menu={menu} />
-            </Pane>
+            </div>
 
             {children}
-        </Pane>
+        </div>
     );
 }
 
