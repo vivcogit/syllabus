@@ -14,7 +14,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@react-page/react-page": "^0.16.4",
     "@zeit/next-css": "^1.0.1",
     "bcryptjs": "^2.4.3",
     "eslint": "^6.8.0",
@@ -26,6 +25,7 @@
     "nookies": "^2.0.8",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-markdown": "^4.3.1",
     "url": "^0.11.0"
   },
   "devDependencies": {

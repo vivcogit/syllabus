@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
-import { EditableType } from '@react-page/core';
 
 interface IRuleData {
     title: string;
     href: string;
-    content: EditableType;
+    content: string;
 }
 
 export interface IRule extends IRuleData {

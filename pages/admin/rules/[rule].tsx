@@ -1,23 +1,10 @@
 import { useState, useCallback, ReactElement } from 'react';
-import { Pane, TextInput, Button, toaster } from 'evergreen-ui';
-
-import Editor from '@react-page/editor';
-import '@react-page/core/lib/index.css';
-import '@react-page/ui/lib/index.css';
-
-import slate from '@react-page/plugins-slate';
-import '@react-page/plugins-slate/lib/index.css';
-import background from '@react-page/plugins-background';
-import '@react-page/plugins-background/lib/index.css';
+import { Pane, TextInput, Button, toaster, Textarea } from 'evergreen-ui';
+import ReactMarkdown from 'react-markdown';
 
 import apiProvider from '../../../providers/api';
 import { IRule } from '../../../types/rule';
 import { NextPageContext } from 'next';
-
-const plugins = {
-    content: [slate()],
-    layout: [background({ defaultPlugin: slate(), imageUpload: null })],
-};
 
 interface IAdminRulePageProps {
     rule: IRule;
@@ -36,7 +23,7 @@ function AdminRulePage(props: IAdminRulePageProps): ReactElement {
             href: title.toLowerCase().replace(/ /g, '_'),
         };
 
-        const isUpdateExisted = !!rule._id;
+        const isUpdateExisted = !!rule?._id;
  
         try {
             let result;
@@ -78,11 +65,14 @@ function AdminRulePage(props: IAdminRulePageProps): ReactElement {
                 </Button>
             </Pane>
 
-            <Editor
-                plugins={plugins}
+            <Textarea
+                placeholder="Input content here..."
                 value={content}
-                onChange={setContent}
-                defaultPlugin={slate()}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setContent(e.target.value)}
+            />
+
+            <ReactMarkdown
+                source={content}
             />
         </Pane>
     );
@@ -94,6 +84,7 @@ AdminRulePage.getInitialProps = async ({ query, req }: NextPageContext): Promise
         const rule = await apiProvider.getRule(ruleHref, req);
         return { rule };
     }
+    return { rule: { title: '', content: '', href: '' } };
 }
 
 export default AdminRulePage;
