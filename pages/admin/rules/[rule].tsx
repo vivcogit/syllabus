@@ -1,10 +1,12 @@
 import { useState, useCallback, ReactElement } from 'react';
-import { Pane, TextInput, Button, toaster, Textarea } from 'evergreen-ui';
+import { Pane, TextInput, toaster } from 'evergreen-ui';
 import ReactMarkdown from 'react-markdown';
 
 import apiProvider from '../../../providers/api';
 import { IRule } from '../../../types/rule';
 import { NextPageContext } from 'next';
+import { Textarea } from '../../../components/Textarea';
+import Button from '../../../components/Button';
 
 interface IAdminRulePageProps {
     rule: IRule;
@@ -55,9 +57,7 @@ function AdminRulePage(props: IAdminRulePageProps): ReactElement {
                 />
 
                 <Button
-                    marginLeft="1em"
-                    appearance="primary"
-                    intent="success"
+                    className="adminRule-submit"
                     disabled={!title}
                     onClick={saveRule}
                 >
@@ -68,7 +68,7 @@ function AdminRulePage(props: IAdminRulePageProps): ReactElement {
             <Textarea
                 placeholder="Input content here..."
                 value={content}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setContent(e.target.value)}
+                onChange={setContent}
             />
 
             <ReactMarkdown
