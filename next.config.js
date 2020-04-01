@@ -1,7 +1,7 @@
-/* global module */
-/* eslint-disable @typescript-eslint/no-var-requires */
-const withCSS = require('@zeit/next-css');
-const withSASS = require('@zeit/next-sass');
-require('dotenv').config();
+require('dotenv').config()
 
-module.exports = withSASS(withCSS({}));
+module.exports = {
+  env: {
+    MONGODB_URI: process.env.MONGODB_URI,
+  },
+};

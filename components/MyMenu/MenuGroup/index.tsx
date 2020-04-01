@@ -1,4 +1,4 @@
-import './MenuGroup.scss';
+import styles from './MenuGroup.module.css';
 
 interface IMenuGroupProps {
   title: string;
@@ -9,8 +9,10 @@ function MenuGroup(props: IMenuGroupProps) {
   const { title, children } = props;
 
   return (
-    <div className="menuGroup">
-      <h2 className="menuGroup-title">{title}</h2>
+    <div className={styles.menuGroup}>
+      <h2 className={styles.menuGroup_title}>
+        {title}
+      </h2>
 
       {children}
     </div>

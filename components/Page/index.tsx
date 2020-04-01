@@ -3,7 +3,7 @@ import { ReactElement } from 'react';
 import MyMenu from '../MyMenu';
 import { IMenuData } from '../../types/menu';
 
-import './page.scss';
+import styles from './page.module.css';
 
 interface IPageProps {
     children: React.ReactNode;
@@ -14,8 +14,8 @@ function Page(props: IPageProps): ReactElement {
     const { children, menu } = props;
     
     return (
-        <div className="page">
-            <div className="page-menu">
+        <div className={styles.page}>
+            <div className={styles.pageMenu}>
                 <MyMenu menu={menu} />
             </div>
 

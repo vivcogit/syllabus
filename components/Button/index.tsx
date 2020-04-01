@@ -1,4 +1,4 @@
-import './Button.scss';
+import styles from './Button.module.css';
 
 interface IButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ function Button(props: IButtonProps) {
 
   return (
     <button
-      className={`button ${className}`}
+      className={`${styles.button} ${styles[className]}`}
       {...otherProps}
     >
       {children}

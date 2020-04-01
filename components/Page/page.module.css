@@ -1,0 +1,9 @@
+.page {
+  align-items: baseline;
+  display: flex;
+}
+
+.pageMenu {
+  border: 1px solid #E4E7EB;
+  flex-basis: 200px;
+}
