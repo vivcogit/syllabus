@@ -1,10 +1,11 @@
 import { useEffect, useState, ReactElement } from 'react';
 import { useRouter } from 'next/router';
-import { Pane } from 'evergreen-ui';
 import ReactMarkdown from 'react-markdown';
 
 import apiProvider from '../../providers/api';
 import { Rule } from '../../entities/Rule';
+
+import styles from './rule.module.css';
 
 const emptyRule: Rule = { title: '', href: '', };
 
@@ -26,10 +27,7 @@ function RulePage(): ReactElement {
     }, [ruleHref]);
 
     return (
-        <Pane
-            paddingLeft="2em"
-            paddingBottom="2em"
-        >
+        <div className={styles.page}>
             {!rule
                 ? <h2>Pending of data</h2>
                 : (
@@ -42,7 +40,7 @@ function RulePage(): ReactElement {
                     </>
                 )
             }
-        </Pane>
+        </div>
     );
 }
 

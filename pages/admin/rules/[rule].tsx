@@ -1,12 +1,14 @@
 import { NextPageContext } from 'next';
 import { useState, useCallback, ReactElement } from 'react';
-import { Pane, TextInput, toaster } from 'evergreen-ui';
+import { TextInput, toaster } from 'evergreen-ui';
 import ReactMarkdown from 'react-markdown';
 
 import apiProvider from '../../../providers/api';
 import Button from '../../../components/Button';
-import { Rule } from '../../../entities/Rule';
 import { Textarea } from '../../../components/Textarea';
+import { Rule } from '../../../entities/Rule';
+
+import styles from './rule.module.css';
 
 interface AdminRulePageProps {
     rule: Rule;
@@ -45,11 +47,8 @@ function AdminRulePage(props: AdminRulePageProps): ReactElement {
     }, [content, title]);
 
     return (
-        <Pane padding="2em" minHeight="50em">
-            <Pane
-                marginBottom="2em"
-                width="100%"
-            >
+        <div className={styles.page}>
+            <div className={styles.form}>
                 <TextInput
                     placeholder="Input title here..."
                     value={title}
@@ -63,7 +62,7 @@ function AdminRulePage(props: AdminRulePageProps): ReactElement {
                 >
                     Save rule
                 </Button>
-            </Pane>
+            </div>
 
             <Textarea
                 placeholder="Input content here..."
@@ -74,7 +73,7 @@ function AdminRulePage(props: AdminRulePageProps): ReactElement {
             <ReactMarkdown
                 source={content}
             />
-        </Pane>
+        </div>
     );
 }
 

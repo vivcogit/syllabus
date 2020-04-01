@@ -2,7 +2,7 @@ import {
     useState, useEffect, useCallback, ReactElement,
 } from 'react';
 import {
-    Heading, Pane, Table, toaster,
+    Table, toaster,
 } from 'evergreen-ui';
 
 import apiProvider from '../../providers/api';
@@ -10,6 +10,8 @@ import AddItemRow from '../../components/Vocabulary/AddItemRow';
 import TableHead from '../../components/Vocabulary/TableHead';
 import { NextPageContext } from 'next';
 import { VocabularyItem } from '../../entities/Vocabulary';
+
+import styles from './vocabulary.module.css';
 
 interface VocabularyProps {
     vocabulary: Array<VocabularyItem>;
@@ -59,17 +61,10 @@ function Vocabulary(props: VocabularyProps): ReactElement {
     ));
 
     return (
-        <Pane
-            padding="1em"
-            flexGrow={1}
-        >
-            <Heading
-                as="h1"
-                size={900}
-                marginBottom="2em"
-            >
+        <div className={styles.page}>
+            <h1 className={styles.header}>
                 Vocabulary
-            </Heading>
+            </h1>
 
             <Table maxWidth="50em">
                 <TableHead
@@ -98,7 +93,7 @@ function Vocabulary(props: VocabularyProps): ReactElement {
                     ))}
                 </Table.Body>
             </Table>
-        </Pane>
+        </div>
     );
 }
 

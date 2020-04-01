@@ -1,7 +1,10 @@
-import { Pane, TextInputField, Button } from "evergreen-ui";
+import { TextInputField } from "evergreen-ui";
 import { useState, useCallback, ReactElement } from "react";
 
-import apiProvider from "../../providers/api";
+import apiProvider from "../../../providers/api";
+import Button from "../../../components/Button";
+
+import styles from './login.module.css';
 
 function LoginPage(): ReactElement {
     const [login, setLogin] = useState('');
@@ -12,14 +15,14 @@ function LoginPage(): ReactElement {
     }, [login, password]);
 
     return (
-        <Pane paddingX="2em">
+        <div className={styles.page}>
             <TextInputField
                 label="Log In"
                 name="log-in"
                 value={login}
                 placeholder="Input your login"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setLogin(e.target.value)}
-                />
+            />
 
             <TextInputField
                 label="Password"
@@ -35,7 +38,7 @@ function LoginPage(): ReactElement {
             >
                 Log In
             </Button>
-        </Pane>
+        </div>
     );
 }
 

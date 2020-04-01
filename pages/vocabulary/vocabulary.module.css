@@ -1,0 +1,13 @@
+.page {
+  padding: 1em;
+  flex-grow: 1;
+}
+
+.header {
+  color: #234361;
+  font-family: "SF UI Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 35px;
+  margin-bottom: 2em;
+  margin-top: 0;
+}
