@@ -4,9 +4,12 @@ import { Pane } from 'evergreen-ui';
 import ReactMarkdown from 'react-markdown';
 
 import apiProvider from '../../providers/api';
+import { Rule } from '../../entities/Rule';
+
+const emptyRule: Rule = { title: '', href: '', };
 
 function RulePage(): ReactElement {
-    const [ rule, setRule ] = useState();
+    const [ rule, setRule ] = useState(emptyRule);
     const router = useRouter();
     const ruleHref = Array.isArray(router.query.rule)
         ? router.query.rule[0]

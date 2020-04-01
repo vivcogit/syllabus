@@ -1,5 +1,5 @@
 import { VocabularyItem } from "../index";
-import { EntitiesRepo } from "../../EntityList";
+import { EntitiesRepo } from "../../Entity";
 import dbProvider from "../../../providers/database";
 
 export class ServerVocabularyRepo implements EntitiesRepo<VocabularyItem> {

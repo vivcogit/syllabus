@@ -8,14 +8,14 @@ import {
 import apiProvider from '../../providers/api';
 import AddItemRow from '../../components/Vocabulary/AddItemRow';
 import TableHead from '../../components/Vocabulary/TableHead';
-import { IVocabularyItem } from '../../types/vocabulary';
 import { NextPageContext } from 'next';
+import { VocabularyItem } from '../../entities/Vocabulary';
 
-interface IVocabularyProps {
-    vocabulary: Array<IVocabularyItem>;
+interface VocabularyProps {
+    vocabulary: Array<VocabularyItem>;
 }
 
-function Vocabulary(props: IVocabularyProps): ReactElement {
+function Vocabulary(props: VocabularyProps): ReactElement {
     const { vocabulary } = props;
 
     const [ filter, setFilter ] = useState('');
@@ -32,7 +32,7 @@ function Vocabulary(props: IVocabularyProps): ReactElement {
     const addItem: () => void = useCallback(async () => {
         setIsPending(true);
 
-        const newItem: IVocabularyItem = {
+        const newItem: VocabularyItem = {
             translation,
             word,
             example,
@@ -52,7 +52,7 @@ function Vocabulary(props: IVocabularyProps): ReactElement {
         setIsPending(false);
     }, [translation, word, example]);
 
-    const usedVocabulary: Array<IVocabularyItem> = data.filter((item) => (
+    const usedVocabulary: Array<VocabularyItem> = data.filter((item) => (
         !filter
             || item.word.indexOf(filter) >= 0
             || item.translation.indexOf(filter) >= 0
@@ -90,7 +90,7 @@ function Vocabulary(props: IVocabularyProps): ReactElement {
                     />
 
                     {usedVocabulary.map((row) => (
-                        <Table.Row key={row.word}>
+                        <Table.Row key={row.id}>
                             <Table.TextCell>{row.word}</Table.TextCell>
                             <Table.TextCell>{row.translation}</Table.TextCell>
                             <Table.TextCell>{row.example}</Table.TextCell>
@@ -102,7 +102,7 @@ function Vocabulary(props: IVocabularyProps): ReactElement {
     );
 }
 
-Vocabulary.getInitialProps = async ({ req }: NextPageContext): Promise<IVocabularyProps> => ({
+Vocabulary.getInitialProps = async ({ req }: NextPageContext): Promise<VocabularyProps> => ({
     vocabulary: await apiProvider.getVocabulary(req),
 });
 

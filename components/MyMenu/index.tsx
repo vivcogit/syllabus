@@ -1,15 +1,15 @@
 import { ReactElement } from 'react';
 
 import MyMenuItem from './MyMenuItem';
-import { IMenuData } from '../../types/menu';
+import { MenuItem } from '../../entities/Menu';
 
 import styles from './Menu.module.css';
 
-interface IMyMenuProps {
-    menu: IMenuData;
+interface MyMenuProps {
+    menu: Array<MenuItem>;
 }
 
-function MyMenu(props: IMyMenuProps): ReactElement {
+function MyMenu(props: MyMenuProps): ReactElement {
     const { menu } = props;
 
     return (

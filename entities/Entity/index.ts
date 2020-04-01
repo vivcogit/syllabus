@@ -1,9 +1,9 @@
 export interface Entity {
-  _id?;
+  id?;
 }
 
 export interface EntitiesRepo<T extends Entity> {
   getAll(): Promise<Array<T>>;
-  getById(id: T['_id']): Promise<T>;
+  getById(id: T['id']): Promise<T>;
   add(item: T): Promise<void>;
 }

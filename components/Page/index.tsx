@@ -1,16 +1,16 @@
 import { ReactElement } from 'react';
 
 import MyMenu from '../MyMenu';
-import { IMenuData } from '../../types/menu';
 
 import styles from './page.module.css';
+import { MenuItem } from '../../entities/Menu';
 
-interface IPageProps {
+interface PageProps {
     children: React.ReactNode;
-    menu: IMenuData;
+    menu: Array<MenuItem>;
 }
 
-function Page(props: IPageProps): ReactElement {
+function Page(props: PageProps): ReactElement {
     const { children, menu } = props;
     
     return (
