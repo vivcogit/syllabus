@@ -3,10 +3,10 @@ import mongoose from 'mongoose';
 
 import Vocabulary from './models/vocabulary';
 import User from './models/user';
-import { IVocabularyDocuments, IVocabularyItem, IVocabularyItemDocument } from '../../types/vocabulary';
-import { IRuleDocument, IShortRule, IRule } from '../../types/rule';
-import Rule from './models/rule';
-import { IUserDocument } from '../../types/user';
+import RuleModel from './models/rule';
+import { ServerUser } from '../../entities/User';
+import { VocabularyItem } from '../../entities/Vocabulary';
+import { Rule, ServerRule } from '../../entities/Rule';
 
 class DataBaseProvider {
     constructor(dbUri: string) {
@@ -21,62 +21,68 @@ class DataBaseProvider {
         });
     }
 
-    async getVocabulary(): Promise<IVocabularyDocuments> {
-        return await Vocabulary.find(
+    async getVocabulary(): Promise<VocabularyItem[]> {
+        const res = await Vocabulary.find(
             {},
             ['word', 'translation', 'example'],
             { sort: { word: 'asc' } },
         );
+
+        return res;
     }
 
-    async insertVocabularyItem(item: IVocabularyItem): Promise<IVocabularyItemDocument> {
+    async insertVocabularyItem(item: VocabularyItem): Promise<VocabularyItem> {
         return await Vocabulary.create(item);
     }
 
-    async updateVocabularyItem(item: IVocabularyItemDocument): Promise<void> {
-        const { _id, ...data } = item;
+    async updateVocabularyItem(item: VocabularyItem): Promise<void> {
+        const { id, ...data } = item;
 
         await Vocabulary.replaceOne(
-            { _id: new mongoose.Types.ObjectId(_id) },
+            { _id: new mongoose.Types.ObjectId(id) },
             data,
         );
     }
 
-    async deleteVocabularyItem(item: IVocabularyItemDocument): Promise<void> {
-        const { _id } = item;
+    async deleteVocabularyItem(item: VocabularyItem): Promise<void> {
+        const { id } = item;
 
         await Vocabulary.deleteOne(
-            { _id: new mongoose.Types.ObjectId(_id) },
+            { _id: new mongoose.Types.ObjectId(id) },
         );
     }
     
-    async getRulesForMenu(): Promise<Array<IShortRule>> {
-        return await Rule.find({}, 'title href');
+    async getRulesForMenu(): Promise<Array<Rule>> {
+        return await RuleModel.find({}, 'title href');
     }
 
-    async getRule(ruleHref: string): Promise<IRuleDocument> {
-        return await Rule.findOne({ href: ruleHref });
+    async getRule(ruleHref: string): Promise<ServerRule> {
+        return await RuleModel.findOne({ href: ruleHref });
     }
 
-    async insertRule(rule: IRule): Promise<void> {
-        await Rule.create(rule);
+    async insertRule(rule: Rule): Promise<void> {
+        await RuleModel.create(rule);
     }
 
-    async updateRule(rule: IRule): Promise<void> {
-        const { _id, ...data } = rule;
+    async updateRule(rule: Rule): Promise<void> {
+        const { id, ...data } = rule;
         
-        await Rule.replaceOne(
-            { _id: new mongoose.Types.ObjectId(_id) },
+        await RuleModel.replaceOne(
+            { _id: new mongoose.Types.ObjectId(id) },
             data,
         );
     }
 
-    async createUser(login: string, password: string): Promise<IUserDocument> {
+    async createUser(login: string, password: string): Promise<ServerUser> {
         return await User.create({ login, password });
     }
 
-    async findUserByCredentials(login: string, password: string): Promise<IUserDocument> {
+    async findUserByCredentials(login: string, password: string): Promise<ServerUser> {
         return await User.findByCredentials(login, password);
+    }
+
+    async findUserByToken(token: string): Promise<ServerUser> {
+        return await User.findByToken(token);
     }
 }
 

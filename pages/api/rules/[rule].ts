@@ -1,6 +1,6 @@
 import dataBaseProvider from '../../../providers/database';
 import { NextApiResponse, NextApiRequest } from 'next';
-import { IRuleDocument } from '../../../types/rule';
+import { ServerRule } from '../../../entities/Rule';
 
 function handleQueryParam(param: string[] | string): string {
     return Array.isArray(param)
@@ -28,7 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
         }
         case 'DELETE': {
             try {
-                const rule: IRuleDocument = await dataBaseProvider.getRule(handleQueryParam(req.query.rule));
+                const rule: ServerRule = await dataBaseProvider.getRule(handleQueryParam(req.query.rule));
 
                 if (!rule) {
                     res.status(404).end();

@@ -2,17 +2,18 @@ import { AppContext } from 'next/app';
 
 import Page from '../components/Page';
 import apiProvider from '../providers/api';
-import { IMenuData } from '../types/menu';
 import { ReactElement } from 'react';
+import { MenuItem } from '../entities/Menu';
 
-interface IMyAppPropsRaw {
-    menu: IMenuData;
+interface MyAppPropsRaw {
+    menu: Array<MenuItem>;
     pageProps?: object;
+    isAuth: boolean;
 }
 
-interface IMyAppProps extends AppContext, IMyAppPropsRaw {}
+interface MyAppProps extends AppContext, MyAppPropsRaw {}
 
-function MyApp(props: IMyAppProps): ReactElement {
+function MyApp(props: MyAppProps): ReactElement {
     const { menu, Component, pageProps = {} } = props;
 
     return (
@@ -22,20 +23,22 @@ function MyApp(props: IMyAppProps): ReactElement {
     );
 }
 
-MyApp.getInitialProps = async (context: AppContext): Promise<IMyAppPropsRaw> => {
+MyApp.getInitialProps = async (context: AppContext): Promise<MyAppPropsRaw> => {
     const { Component, ctx } = context;
     const menu = await apiProvider.getMenu(ctx.req);
+    const isAuth = await apiProvider.getIsAuth(ctx.req);
     
     if (Component.getInitialProps) {
         const pageProps = await Component.getInitialProps(ctx);
 
         return {
             menu,
+            isAuth,
             pageProps,
         }
     }
 
-    return { menu };
+    return { menu, isAuth };
 }
 
 export default MyApp;

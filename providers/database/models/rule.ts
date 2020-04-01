@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import { IRuleDocument } from '../../../types/rule';
+import { ServerRule } from '../../../entities/Rule';
 
 const ruleSchema = new mongoose.Schema({
     title: {
@@ -29,11 +29,11 @@ const ruleSchema = new mongoose.Schema({
     },
 });
 
-let Rule: mongoose.Model<IRuleDocument>;
+let model: mongoose.Model<ServerRule>;
 try {
-    Rule = mongoose.model('Rule');
+    model = mongoose.model('Rule');
 } catch (error) {
-    Rule = mongoose.model('Rule', ruleSchema);
+    model = mongoose.model('Rule', ruleSchema);
 }
 
-export default Rule;
+export default model;

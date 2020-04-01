@@ -2,14 +2,14 @@ import { ReactElement } from 'react';
 
 import MyMenuLink from './MyMenuLink';
 import MenuDivider from './MenuDivider';
-import { IMenuItem, MenuItemType } from '../../types/menu';
 import MenuGroup from './MenuGroup';
+import { MenuItemType, MenuItem } from '../../entities/Menu';
 
-interface IMyMenuItemProps {
-    item: IMenuItem;
+interface MyMenuItemProps {
+    item: MenuItem;
 }
 
-function MyMenuItem(props: IMyMenuItemProps): ReactElement {
+function MyMenuItem(props: MyMenuItemProps): ReactElement {
     const { item } = props;
 
     switch (item.type) {

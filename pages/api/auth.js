@@ -1,13 +1,20 @@
-import { setCookie } from 'nookies';
+import { setCookie, parseCookies } from 'nookies';
 
 import dataBaseProvider from '../../providers/database';
 
 export default async (req, res) => {
     switch (req.method) {
+        case 'GET': {
+            const cookies = parseCookies({req});
+
+            const user = await dataBaseProvider.findUserByToken(cookies['auth_token']);
+
+            return res.status(200).json({ success: true, isAuth: !!user });
+        }
         case 'POST': {
             const { login, password } = req.body;
 
-            try {                
+            try {
                 const user = await dataBaseProvider.findUserByCredentials(login, password);
 
                 if (!user) {

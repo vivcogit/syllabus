@@ -1,31 +1,31 @@
+import { NextPageContext } from 'next';
 import { useState, useCallback, ReactElement } from 'react';
 import { Pane, TextInput, toaster } from 'evergreen-ui';
 import ReactMarkdown from 'react-markdown';
 
 import apiProvider from '../../../providers/api';
-import { IRule } from '../../../types/rule';
-import { NextPageContext } from 'next';
-import { Textarea } from '../../../components/Textarea';
 import Button from '../../../components/Button';
+import { Rule } from '../../../entities/Rule';
+import { Textarea } from '../../../components/Textarea';
 
-interface IAdminRulePageProps {
-    rule: IRule;
+interface AdminRulePageProps {
+    rule: Rule;
 }
 
-function AdminRulePage(props: IAdminRulePageProps): ReactElement {
+function AdminRulePage(props: AdminRulePageProps): ReactElement {
     const { rule } = props;
 
     const [ content, setContent ] = useState(rule?.content);
     const [ title, setTitle ] = useState(rule?.title || '');
 
     const saveRule = useCallback(async () => {
-        const ruleForSave: IRule = {
+        const ruleForSave: Rule = {
             content,
             title,
             href: title.toLowerCase().replace(/ /g, '_'),
         };
 
-        const isUpdateExisted = !!rule?._id;
+        const isUpdateExisted = !!rule?.id;
  
         try {
             let result;
@@ -78,7 +78,7 @@ function AdminRulePage(props: IAdminRulePageProps): ReactElement {
     );
 }
 
-AdminRulePage.getInitialProps = async ({ query, req }: NextPageContext): Promise<IAdminRulePageProps> => {
+AdminRulePage.getInitialProps = async ({ query, req }: NextPageContext): Promise<AdminRulePageProps> => {
     if (query.rule !== 'new') {
         const ruleHref = Array.isArray(query.rule) ? query.rule[0] : query.rule;
         const rule = await apiProvider.getRule(ruleHref, req);
