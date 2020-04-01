@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { ServerVocabularyItem } from '../../../types/vocabulary';
+import { VocabularyItem } from '../../../entities/Vocabulary';
 
 const vocabularySchema = new mongoose.Schema({
     word: {
@@ -18,7 +18,11 @@ const vocabularySchema = new mongoose.Schema({
     },
 });
 
-let Vocabulary: mongoose.Model<ServerVocabularyItem>;
+interface VocabularyItemModel extends VocabularyItem, mongoose.Document {
+    id?: mongoose.Document['id'];
+}
+
+let Vocabulary: mongoose.Model<VocabularyItemModel>;
 try {
     Vocabulary = mongoose.model('Vocabulary');
 } catch (error) {
