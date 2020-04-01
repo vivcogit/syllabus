@@ -1,7 +1,7 @@
-import './MenuDivider.scss';
+import styles from './MenuDivider.module.css';
 
 function MenuDivider() {
-  return (<div className="menuDivider" />);
+  return (<div className={styles.menuDivider} />);
 }
 
 export default MenuDivider;
