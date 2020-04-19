@@ -5,7 +5,6 @@ import { IncomingMessage } from 'http';
 import { VocabularyItem } from "../entities/Vocabulary";
 import { MenuItem } from '../entities/Menu';
 import { Rule } from '../entities/Rule';
-import { User } from '../entities/User';
 
 enum EMethod {
     GET = 'GET',
@@ -27,7 +26,6 @@ class ApiProvider {
     }
 
     static handleError(error: Error): void {
-        console.error(error);
         throw new Error(error.message);
     }
 
@@ -43,7 +41,7 @@ class ApiProvider {
 
         const headers = {
             ...(body && {'Content-Type': 'application/json'}),
-            cookie: req?.headers?.cookie,
+            // cookie: req?.headers?.cookie,
         };
 
         try {
@@ -58,6 +56,7 @@ class ApiProvider {
 
             return await ApiProvider.handleResponse(response);
         } catch (error) {
+            console.log(`error url: ${ApiProvider.getHostFromReq(req)}${url}`)
             return ApiProvider.handleError(error);
         }
     }
@@ -111,8 +110,9 @@ class ApiProvider {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async getIsAuth(req?: IncomingMessage): Promise<boolean> {
-        const res = await this.get('/api/auth', req);
-        return res.isAuth;
+        // const res = await this.get('/api/auth', req);
+        // return res?.isAuth;
+        return true;
     }
 
 }

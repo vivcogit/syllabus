@@ -25,20 +25,20 @@ function MyApp(props: MyAppProps): ReactElement {
 
 MyApp.getInitialProps = async (context: AppContext): Promise<MyAppPropsRaw> => {
     const { Component, ctx } = context;
-    const menu = await apiProvider.getMenu(ctx.req);
+    // const menu = await apiProvider.getMenu(ctx.req);
     const isAuth = await apiProvider.getIsAuth(ctx.req);
     
     if (Component.getInitialProps) {
         const pageProps = await Component.getInitialProps(ctx);
 
         return {
-            menu,
+            menu: null,
             isAuth,
             pageProps,
         }
     }
 
-    return { menu, isAuth };
+    return { menu: null, isAuth };
 }
 
 export default MyApp;

@@ -1,33 +1,32 @@
 import dataBaseProvider from '../../providers/database';
+import { Rule } from '../../entities/Rule';
+import { MenuItem, MenuItemType } from '../../entities/Menu';
 
-const generateMenu = (rules) => [
+const generateMenu = (rules: Rule[]): MenuItem[] => [
     {
-        type: 'group',
+        type: MenuItemType.Group,
         title: 'Basic',
         items: [
             {
                 title: 'Vocabulary',
                 href: '/vocabulary',
-                type: 'link',
             }
         ],
     },
     {
-        type: 'divider',
+        type: MenuItemType.Divider,
     },
     {
-        type: 'group',
+        type: MenuItemType.Group,
         title: 'Rules',
         items: rules.map(({ title, href }) => ({
             title,
             href: `/rules/${href}`,
-            type: 'link',
         })),
     },
 ];
 
-export default async (req, res) => {
+export default async (req, res): Promise<void> => {
     const rules = await dataBaseProvider.getRulesForMenu();
-
     res.status(200).json(generateMenu(rules));
 }

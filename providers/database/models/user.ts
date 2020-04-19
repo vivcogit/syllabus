@@ -8,6 +8,7 @@ import { ServerUser } from '../../../entities/User';
 interface ServerUserModel extends mongoose.Model<ServerUser> {
     findByCredentials: (login: string, password: string) => Promise<ServerUser>;
     findByToken: (token: string) => Promise<ServerUser>;
+    checkToken: (token: string) => Promise<boolean>;
 }
 
 let ServerUserImpl: ServerUserModel;
@@ -73,6 +74,12 @@ userSchema.statics.findByToken = async (token: string): Promise<ServerUser> => {
     } catch (error) {
         return null;
     }
+}
+
+userSchema.statics.checkToken = async (token: string): Promise<boolean> => {
+    const user = ServerUserImpl.findByToken(token);
+
+    return !!user;
 }
 
 userSchema.statics.findByCredentials = async (login: string, password: string): Promise<ServerUser> => {

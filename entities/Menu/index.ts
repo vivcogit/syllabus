@@ -8,11 +8,11 @@ export enum MenuItemType {
 
 export interface MenuItem extends Entity {
   type: MenuItemType;
-  items: Array<{
+  items?: Array<{
     title: string | undefined;
     href: string | undefined;
   }>;
-  title: string | undefined;
-  href: string | undefined;
+  title?: string | undefined;
+  href?: string | undefined;
   id?: string;
 }

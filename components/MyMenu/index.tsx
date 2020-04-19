@@ -14,7 +14,7 @@ function MyMenu(props: MyMenuProps): ReactElement {
 
     return (
         <nav className={styles.menu}>
-            {menu.map((menuItem, ix) => (
+            {menu?.map((menuItem, ix) => (
                 <MyMenuItem item={menuItem} key={ix} />
             ))}
         </nav>

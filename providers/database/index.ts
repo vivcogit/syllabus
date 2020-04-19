@@ -6,7 +6,7 @@ import User from './models/user';
 import RuleModel from './models/rule';
 import { ServerUser } from '../../entities/User';
 import { VocabularyItem } from '../../entities/Vocabulary';
-import { Rule, ServerRule } from '../../entities/Rule';
+import { Rule } from '../../entities/Rule';
 
 class DataBaseProvider {
     constructor(dbUri: string) {
@@ -56,8 +56,8 @@ class DataBaseProvider {
         return await RuleModel.find({}, 'title href');
     }
 
-    async getRule(ruleHref: string): Promise<ServerRule> {
-        return await RuleModel.findOne({ href: ruleHref });
+    async getRule(ruleId: string): Promise<Rule> {
+        return await RuleModel.findOne({ href: ruleId });
     }
 
     async insertRule(rule: Rule): Promise<void> {
@@ -73,6 +73,16 @@ class DataBaseProvider {
         );
     }
 
+    async removeRule(ruleId: string): Promise<any> {
+        const rule = await RuleModel.findOne({ href: ruleId });
+
+        if (!rule) {
+            throw new Error('Rule not found');
+        }
+
+        await rule.remove();
+    }
+
     async createUser(login: string, password: string): Promise<ServerUser> {
         return await User.create({ login, password });
     }
@@ -83,6 +93,10 @@ class DataBaseProvider {
 
     async findUserByToken(token: string): Promise<ServerUser> {
         return await User.findByToken(token);
+    }
+
+    async checkUserToken(token: string): Promise<boolean> {
+        return await User.checkToken(token);
     }
 }
 

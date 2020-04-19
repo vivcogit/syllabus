@@ -1,15 +1,17 @@
+import { NowRequest, NowResponse } from '@now/node';
 import { setCookie, parseCookies } from 'nookies';
 
 import dataBaseProvider from '../../providers/database';
 
-export default async (req, res) => {
+export default async (req: NowRequest, res: NowResponse): Promise<void> => {
+    console.log('test')
     switch (req.method) {
         case 'GET': {
             const cookies = parseCookies({req});
 
-            const user = await dataBaseProvider.findUserByToken(cookies['auth_token']);
+            const isAuth = await dataBaseProvider.checkUserToken(cookies['auth_token']);
 
-            return res.status(200).json({ success: true, isAuth: !!user });
+            return res.status(200).json({ success: true, isAuth }).end();
         }
         case 'POST': {
             const { login, password } = req.body;
@@ -20,7 +22,8 @@ export default async (req, res) => {
                 if (!user) {
                     return res
                         .status(404)
-                        .json({ error: 'User not found or password is incorrect' });
+                        .json({ error: 'User not found or password is incorrect' })
+                        .end();
                 }
 
                 const token = await user.generateAuthToken();
@@ -36,11 +39,13 @@ export default async (req, res) => {
                 );
 
                 return res.status(200)
-                    .json({ success: true });
+                    .json({ success: true })
+                    .end();
             } catch (error) {
                 console.error(error)
                 return res.status(500)
-                    .json({ error: error.message });
+                    .json({ error: error.message })
+                    .end();
             }
         }
         default:
