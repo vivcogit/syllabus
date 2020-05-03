@@ -15,10 +15,11 @@ import styles from './vocabulary.module.css';
 
 interface VocabularyProps {
     vocabulary: Array<VocabularyItem>;
+    isAuth: boolean;
 }
 
 function Vocabulary(props: VocabularyProps): ReactElement {
-    const { vocabulary } = props;
+    const { vocabulary, isAuth } = props;
 
     const [ filter, setFilter ] = useState('');
     const [ word, setWord ] = useState('');
@@ -66,6 +67,19 @@ function Vocabulary(props: VocabularyProps): ReactElement {
                 Vocabulary
             </h1>
 
+            {isAuth && (
+                <AddItemRow
+                    word={word}
+                    example={example}
+                    translation={translation}
+                    onChangeWord={setWord}
+                    onChangeTranslation={setTranslation}
+                    onChangeExample={setExample}
+                    onAdd={addItem}
+                    isPending={isPending}
+                />
+            )}
+
             <Table maxWidth="50em">
                 <TableHead
                     filter={filter}
@@ -73,22 +87,16 @@ function Vocabulary(props: VocabularyProps): ReactElement {
                 />
 
                 <Table.Body>
-                    <AddItemRow
-                        word={word}
-                        example={example}
-                        translation={translation}
-                        onChangeWord={setWord}
-                        onChangeTranslation={setTranslation}
-                        onChangeExample={setExample}
-                        onAdd={addItem}
-                        isPending={isPending}
-                    />
-
                     {usedVocabulary.map((row) => (
-                        <Table.Row key={row.id}>
+                        <Table.Row key={row._id}>
                             <Table.TextCell>{row.word}</Table.TextCell>
                             <Table.TextCell>{row.translation}</Table.TextCell>
                             <Table.TextCell>{row.example}</Table.TextCell>
+                            {isAuth && (
+                                <Table.TextCell>
+                                    <button>delete</button>
+                                </Table.TextCell>
+                            )}
                         </Table.Row>
                     ))}
                 </Table.Body>
@@ -97,7 +105,7 @@ function Vocabulary(props: VocabularyProps): ReactElement {
     );
 }
 
-Vocabulary.getInitialProps = async ({ req }: NextPageContext): Promise<VocabularyProps> => ({
+Vocabulary.getInitialProps = async ({ req }: NextPageContext): Promise<any> => ({
     vocabulary: await apiProvider.getVocabulary(req),
 });
 

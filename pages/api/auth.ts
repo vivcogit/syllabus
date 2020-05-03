@@ -3,15 +3,15 @@ import { setCookie, parseCookies } from 'nookies';
 
 import dataBaseProvider from '../../providers/database';
 
-export default async (req: NowRequest, res: NowResponse): Promise<void> => {
-    console.log('test')
+export default async (req: NowRequest, res: NowResponse): Promise<NowResponse> => {
     switch (req.method) {
         case 'GET': {
-            const cookies = parseCookies({req});
+            const cookies = parseCookies({ req });
+            const token = cookies['auth_token'];
 
-            const isAuth = await dataBaseProvider.checkUserToken(cookies['auth_token']);
+            const isAuth = await dataBaseProvider.checkUserToken(token);
 
-            return res.status(200).json({ success: true, isAuth }).end();
+            return res.status(200).json({ success: true, isAuth });
         }
         case 'POST': {
             const { login, password } = req.body;
@@ -22,8 +22,7 @@ export default async (req: NowRequest, res: NowResponse): Promise<void> => {
                 if (!user) {
                     return res
                         .status(404)
-                        .json({ error: 'User not found or password is incorrect' })
-                        .end();
+                        .json({ error: 'User not found or password is incorrect' });
                 }
 
                 const token = await user.generateAuthToken();
@@ -39,16 +38,14 @@ export default async (req: NowRequest, res: NowResponse): Promise<void> => {
                 );
 
                 return res.status(200)
-                    .json({ success: true })
-                    .end();
+                    .json({ success: true });
             } catch (error) {
                 console.error(error)
                 return res.status(500)
-                    .json({ error: error.message })
-                    .end();
+                    .json({ error: error.message });
             }
         }
         default:
-            return res.status(405).end();
+            return res.status(405);
     }
 }

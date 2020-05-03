@@ -44,7 +44,7 @@ userSchema.pre<ServerUser>('save', async function (next) {
     next();
 });
 
-userSchema.methods.generateAuthToken = async (): Promise<string> => {
+userSchema.methods.generateAuthToken = async function (): Promise<string> {
     const token = jwt.sign({ _id: this.id }, process.env.JWT_KEY);
     this.tokens = this.tokens.concat({ token, stamp: new Date().getTime(), });
 
@@ -99,9 +99,10 @@ userSchema.statics.findByCredentials = async (login: string, password: string): 
 }
 
 try {
-    ServerUserImpl = mongoose.model<ServerUser, ServerUserModel>('User');
-} catch (error) {
     ServerUserImpl = mongoose.model<ServerUser, ServerUserModel>('User', userSchema);
+} catch (error) {
+    // console.error(error)
+    ServerUserImpl = mongoose.model<ServerUser, ServerUserModel>('User');
 }
 
 export default ServerUserImpl;

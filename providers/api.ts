@@ -41,7 +41,7 @@ class ApiProvider {
 
         const headers = {
             ...(body && {'Content-Type': 'application/json'}),
-            // cookie: req?.headers?.cookie,
+            cookie: req?.headers?.cookie,
         };
 
         try {
@@ -110,9 +110,8 @@ class ApiProvider {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async getIsAuth(req?: IncomingMessage): Promise<boolean> {
-        // const res = await this.get('/api/auth', req);
-        // return res?.isAuth;
-        return true;
+        const res = await this.get('/api/auth', req);
+        return res?.isAuth;
     }
 
 }

@@ -5,4 +5,5 @@ export interface VocabularyItem extends Entity {
   translation: string;
   example?: string;
   id?: string;
+  _id?: string;
 }

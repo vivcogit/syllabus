@@ -8,13 +8,15 @@ import { MenuItem } from '../entities/Menu';
 interface MyAppPropsRaw {
     menu: Array<MenuItem>;
     pageProps?: object;
-    isAuth: boolean;
 }
 
 interface MyAppProps extends AppContext, MyAppPropsRaw {}
 
 function MyApp(props: MyAppProps): ReactElement {
-    const { menu, Component, pageProps = {} } = props;
+    const {
+        Component,
+        menu, pageProps = {},
+    } = props;
 
     return (
         <Page menu={menu}>
@@ -25,20 +27,22 @@ function MyApp(props: MyAppProps): ReactElement {
 
 MyApp.getInitialProps = async (context: AppContext): Promise<MyAppPropsRaw> => {
     const { Component, ctx } = context;
-    // const menu = await apiProvider.getMenu(ctx.req);
+    const menu = await apiProvider.getMenu(ctx.req);
     const isAuth = await apiProvider.getIsAuth(ctx.req);
     
     if (Component.getInitialProps) {
         const pageProps = await Component.getInitialProps(ctx);
 
         return {
-            menu: null,
-            isAuth,
-            pageProps,
+            menu,
+            pageProps: {
+                ...pageProps,
+                isAuth,
+            },
         }
     }
 
-    return { menu: null, isAuth };
+    return { menu, pageProps: { isAuth } };
 }
 
 export default MyApp;

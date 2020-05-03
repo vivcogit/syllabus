@@ -96,6 +96,10 @@ class DataBaseProvider {
     }
 
     async checkUserToken(token: string): Promise<boolean> {
+        if (!token) {
+            return false;
+        }
+
         return await User.checkToken(token);
     }
 }
